@@ -1,0 +1,68 @@
+﻿:root {
+    --bg-color: #fcfbfa; /* Fondo crema suave para lectura */
+    --text-color: #2c2523; /* Texto oscuro */
+    --accent-color: #721c24; /* Detalle rosa negra / vino */
+    --card-bg: #ffffff;
+    --border-color: #e9e5e2;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.main-header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+.container {
+    max-width: 800px; /* Ancho óptimo de lectura */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.post-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    margin-bottom: 40px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+    .post-card h2 {
+        font-size: 1.8rem;
+        color: var(--text-color);
+        margin-bottom: 15px;
+    }
+
+/* Control estricto de imágenes para que no se desborden en el móvil */
+.contenido-relato img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 20px auto;
+    border-radius: 4px;
+}
+
+.main-footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}

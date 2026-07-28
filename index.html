@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mara Rosanegra | Rincón Literario</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- Encabezado y Menú -->
+    <header class="main-header">
+        <div class="logo">Mara Rosanegra</div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Sección de Bienvenida -->
+    <section class="hero-section">
+        <h1>Bienvenidos a mi rincón literario</h1>
+        <p class="tagline">Historias, reflexiones y poesía envueltas en misterio.</p>
+    </section>
+
+    <!-- Contenedor vacío donde JavaScript meterá los relatos reales del JSON -->
+    <main class="container" id="blog-feed"></main>
+
+    <!-- Pie de página -->
+    <footer class="main-footer">
+        <p>&copy; 2026 Mara Rosanegra. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- El script que lee el archivo posts.json -->
+    <script>
+        fetch('posts.json')
+            .then(response => response.json())
+            .then(data => {
+                const entries = data.feed.entry;
+                const container = document.getElementById('blog-feed');
+
+                entries.forEach(post => {
+                    const title = post.title.$t;
+                    let content = post.content.$t;
+
+                    // Modifica los enlaces de imágenes de Blogger para que apunten a tu carpeta local 'img'
+                    // Busca imágenes con nombres tipo s1600/nombre.jpg y las adapta
+                    content = content.replace(/https:\/\/[\w\.\/-]+\/([^\/]+\.(?:jpg|jpeg|png|gif))/g, 'img/$1');
+
+                    const article = document.createElement('article');
+                    article.className = 'post-card';
+                    article.innerHTML = `
+                            <h2>${title}</h2>
+                            <div class="contenido-relato">${content}</div>
+                        `;
+                    container.appendChild(article);
+                });
+            })
+            .catch(error => console.error('Error al cargar los relatos:', error));
+    </script>
+</body>
+</html>
