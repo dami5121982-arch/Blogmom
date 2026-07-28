@@ -23,39 +23,62 @@
         <p class="tagline">Historias, reflexiones y poesía envueltas en misterio.</p>
     </section>
 
-    <!-- Contenedor vacío donde JavaScript meterá los relatos reales del JSON -->
-    <main class="container" id="blog-feed"></main>
+    <!-- Contenedor donde se cargarán los relatos -->
+    <main class="container" id="blog-feed">
+        <p style="text-align:center; font-style:italic; color:#777;">Buscando relatos en el archivo...</p>
+    </main>
 
     <!-- Pie de página -->
     <footer class="main-footer">
         <p>&copy; 2026 Mara Rosanegra. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- El script que lee el archivo posts.json -->
+    <!-- Script Ultra-Resistente para Blogger JSON -->
     <script>
         fetch('posts.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("No se pudo leer el archivo posts.json");
+                }
+                return response.json();
+            })
             .then(data => {
-                // Comprobamos la estructura exacta de Blogger y extraemos las entradas
-                const entries = data.feed ? data.feed.entry : (data.entry || []);
                 const container = document.getElementById('blog-feed');
+                container.innerHTML = ""; // Limpiamos el mensaje de espera
+
+                // Buscamos las entradas en cualquier rincón del JSON por seguridad
+                let entries = [];
+                if (data.feed && data.feed.entry) {
+                    entries = data.feed.entry;
+                } else if (data.entry) {
+                    entries = data.entry;
+                } else if (Array.isArray(data)) {
+                    entries = data;
+                }
 
                 if (entries.length === 0) {
-                    container.innerHTML = "<p style='text-align:center; font-style:italic;'>Cargando los relatos de Mara...</p>";
+                    container.innerHTML = "<p style='text-align:center; font-style:italic;'>No se encontraron relatos dentro del archivo JSON.</p>";
                     return;
                 }
 
+                // Recorremos los relatos encontrados
                 entries.forEach(post => {
-                    // Extraemos el título de forma segura
-                    const title = post.title ? post.title.$t : 'Relato sin título';
+                    // Extraer título
+                    let title = "Relato sin título";
+                    if (post.title && post.title.$t) title = post.title.$t;
+                    else if (post.title) title = post.title;
 
-                    // Extraemos el contenido del texto
-                    let content = post.content ? post.content.$t : (post.summary ? post.summary.$t : '');
+                    // Extraer contenido del texto
+                    let content = "";
+                    if (post.content && post.content.$t) content = post.content.$t;
+                    else if (post.summary && post.summary.$t) content = post.summary.$t;
+                    else if (post.body) content = post.body;
 
                     if (content) {
-                        // Forzamos a que las imágenes internas apunten a tu carpeta local de fotos en minúsculas
+                        // Cambiamos las imágenes antiguas de Blogger para que busquen en tu carpeta local 'img'
                         content = content.replace(/https:\/\/[\w\.\/-]+\/([^\/]+\.(?:jpg|jpeg|png|gif))/gi, 'img/$1');
 
+                        // Creamos el artículo responsive en la pantalla
                         const article = document.createElement('article');
                         article.className = 'post-card';
                         article.innerHTML = `
@@ -67,10 +90,13 @@
                 });
             })
             .catch(error => {
-                console.error('Error al cargar los relatos:', error);
-                document.getElementById('blog-feed').innerHTML = "<p style='text-align:center; color:red;'>Hubo un problema al cargar los relatos. Verifica que posts.json esté en la carpeta.</p>";
+                console.error('Error detallado:', error);
+                document.getElementById('blog-feed').innerHTML = `
+                        <div style='text-align:center; padding:20px; color:#721c24; background:#f8d7da; border-radius:4px;'>
+                            <strong>¡Casi lo tenemos!</strong><br>
+                            Sube este archivo corregido a GitHub para activar el servidor y ver los relatos en tu móvil.
+                        </div>`;
             });
     </script>
-
 </body>
 </html>
