@@ -36,27 +36,41 @@
         fetch('posts.json')
             .then(response => response.json())
             .then(data => {
-                const entries = data.feed.entry;
+                // Comprobamos la estructura exacta de Blogger y extraemos las entradas
+                const entries = data.feed ? data.feed.entry : (data.entry || []);
                 const container = document.getElementById('blog-feed');
 
+                if (entries.length === 0) {
+                    container.innerHTML = "<p style='text-align:center; font-style:italic;'>Cargando los relatos de Mara...</p>";
+                    return;
+                }
+
                 entries.forEach(post => {
-                    const title = post.title.$t;
-                    let content = post.content.$t;
+                    // Extraemos el título de forma segura
+                    const title = post.title ? post.title.$t : 'Relato sin título';
 
-                    // Modifica los enlaces de imágenes de Blogger para que apunten a tu carpeta local 'img'
-                    // Busca imágenes con nombres tipo s1600/nombre.jpg y las adapta
-                    content = content.replace(/https:\/\/[\w\.\/-]+\/([^\/]+\.(?:jpg|jpeg|png|gif))/g, 'img/$1');
+                    // Extraemos el contenido del texto
+                    let content = post.content ? post.content.$t : (post.summary ? post.summary.$t : '');
 
-                    const article = document.createElement('article');
-                    article.className = 'post-card';
-                    article.innerHTML = `
-                            <h2>${title}</h2>
-                            <div class="contenido-relato">${content}</div>
-                        `;
-                    container.appendChild(article);
+                    if (content) {
+                        // Forzamos a que las imágenes internas apunten a tu carpeta local de fotos en minúsculas
+                        content = content.replace(/https:\/\/[\w\.\/-]+\/([^\/]+\.(?:jpg|jpeg|png|gif))/gi, 'img/$1');
+
+                        const article = document.createElement('article');
+                        article.className = 'post-card';
+                        article.innerHTML = `
+                                <h2>${title}</h2>
+                                <div class="contenido-relato">${content}</div>
+                            `;
+                        container.appendChild(article);
+                    }
                 });
             })
-            .catch(error => console.error('Error al cargar los relatos:', error));
+            .catch(error => {
+                console.error('Error al cargar los relatos:', error);
+                document.getElementById('blog-feed').innerHTML = "<p style='text-align:center; color:red;'>Hubo un problema al cargar los relatos. Verifica que posts.json esté en la carpeta.</p>";
+            });
     </script>
+
 </body>
 </html>
