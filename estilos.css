@@ -99,3 +99,102 @@ body {
         margin: 20px auto;
         border-radius: 4px;
     }
+/* ===================================================
+   PALETAS DE COLORES AUTOMÁTICAS POR ESTACIÓN
+   =================================================== */
+
+/* 🌸 PRIMAVERA: Tonos florales, rosas viejos y verdes suaves */
+body.primavera {
+    background-color: #f7f3f5;
+    color: #2c3e2e;
+}
+
+    body.primavera .post-titulo {
+        color: #d46a7f;
+        font-family: 'Georgia', serif;
+    }
+
+    body.primavera .post-tarjeta {
+        background: #ffffff;
+        border-left: 4px solid #e8b4b8;
+        box-shadow: 0 4px 15px rgba(232,180,184,0.15);
+    }
+
+    body.primavera .post-fecha {
+        color: #8fa89b;
+        font-style: italic;
+    }
+
+/* ☀️ VERANO: Tonos cálidos, arenas, dorados y terracotas */
+body.verano {
+    background-color: #fcf9f2;
+    color: #3c2f2f;
+}
+
+    body.verano .post-titulo {
+        color: #c87d55;
+        font-family: 'Georgia', serif;
+    }
+
+    body.verano .post-tarjeta {
+        background: #ffffff;
+        border-left: 4px solid #e0b094;
+        box-shadow: 0 4px 15px rgba(224,176,148,0.15);
+    }
+
+    body.verano .post-fecha {
+        color: #a89f91;
+        font-style: italic;
+    }
+
+/* 🍂 OTOÑO: Tonos ocres, mostazas oscuros y marrones tierra */
+body.otono {
+    background-color: #f5efe6;
+    color: #3e2723;
+}
+
+    body.otono .post-titulo {
+        color: #a0522d;
+        font-family: 'Georgia', serif;
+    }
+
+    body.otono .post-tarjeta {
+        background: #ffffff;
+        border-left: 4px solid #cd853f;
+        box-shadow: 0 4px 15px rgba(205,133,63,0.15);
+    }
+
+    body.otono .post-fecha {
+        color: #8d7b68;
+        font-style: italic;
+    }
+
+/* ❄️ INVIERNO: Tonos fríos, grises azulados y borgoña profundo */
+body.invierno {
+    background-color: #f0f4f8;
+    color: #2d3748;
+}
+
+    body.invierno .post-titulo {
+        color: #4a5568;
+        font-family: 'Georgia', serif;
+    }
+
+    body.invierno .post-tarjeta {
+        background: #ffffff;
+        border-left: 4px solid #718096;
+        box-shadow: 0 4px 15px rgba(113,128,150,0.1);
+    }
+
+    body.invierno .post-fecha {
+        color: #a0aec0;
+        font-style: italic;
+    }
+
+/* Estilo general para las tarjetas */
+.post-tarjeta {
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
