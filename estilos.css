@@ -32,16 +32,26 @@ html, body {
     box-sizing: border-box;
 }
 
+/* LOGOTIPO CON RELIEVE Y TEXTURA COBRE METALIZADO */
 .logotipo {
-    background: #252525; /* Gris oscuro serio y sobrio */
-    color: #ffffff;
+    background: linear-gradient(135deg, #1f1610 0%, #110b07 100%);
     padding: 15px;
     font-weight: bold;
     font-size: 1.1rem;
     line-height: 1.2;
     letter-spacing: 1px;
     text-align: center;
-    border: 1px solid #333333;
+    border-radius: 4px;
+    /* Efecto metalizado con degradado en el texto */
+    background-image: linear-gradient(135deg, #f3af7b 0%, #b87333 40%, #dd9359 70%, #804c1c 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    /* Relieve 3D mediante doble sombra en el texto */
+    text-shadow: 1px 1px 0px #4d2c10, -1px -1px 0px #ffeedd, 0px 4px 8px rgba(0,0,0,0.9);
+    /* Relieve y profundidad en la caja contenedora */
+    border: 1px solid #704214;
+    box-shadow: inset 1px 1px 3px rgba(255,255,255,0.1), inset -1px -1px 3px rgba(0,0,0,0.8), 0px 4px 10px rgba(0,0,0,0.5);
 }
 
 .navegacion-vertical {
@@ -57,13 +67,14 @@ html, body {
         font-size: 0.85rem;
         font-weight: bold;
         letter-spacing: 2px;
-        transition: color 0.3s;
+        transition: all 0.3s;
     }
 
-        /* Enlaces activos o al pasar el ratón: Blanco puro */
+        /* Enlaces activos: Brillo cobre metálico pulido */
         .navegacion-vertical a:hover,
         .navegacion-vertical a.active {
-            color: #ffffff;
+            color: #f3af7b;
+            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.6);
         }
 
 /* ===================================================
@@ -86,7 +97,6 @@ html, body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        /* Fuerza el blanco y negro artístico con alto contraste */
         filter: grayscale(100%) contrast(120%) brightness(80%);
     }
 
@@ -109,8 +119,11 @@ html, body {
     .texto-superpuesto-foto p {
         font-size: 0.9rem;
         letter-spacing: 4px;
-        color: #888888;
-        border-top: 1px solid #333333;
+        background: linear-gradient(135deg, #f3af7b 0%, #b87333 50%, #804c1c 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        border-top: 1px solid #2d2d2d;
         padding-top: 10px;
         display: inline-block;
     }
@@ -126,7 +139,7 @@ html, body {
 }
 
     .puntos-carrusel span.activo {
-        color: #ffffff;
+        color: #b87333;
     }
 
 /* ===================================================
@@ -134,13 +147,13 @@ html, body {
    =================================================== */
 .seccion-acerca-de {
     width: 30%;
-    background: #1a1a1a;
+    background: #161616;
     padding: 50px 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    overflow-y: auto; /* Scroll si el texto es muy largo */
+    overflow-y: auto;
     border-left: 1px solid #252525;
 }
 
@@ -151,9 +164,13 @@ html, body {
         margin: 0;
     }
 
+/* LÍNEA DIVISORIA CON GRABADO DE COBRE METÁLICO EN TRES DIMENSIONES */
 .linea-decorativa {
-    width: 50px;
-    border: 1px solid #666666; /* Gris platino minimalista */
+    width: 60px;
+    height: 3px;
+    border: none;
+    background: linear-gradient(90deg, #804c1c 0%, #b87333 30%, #f3af7b 50%, #b87333 70%, #4d2c10 100%);
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 1px rgba(255,255,255,0.1);
     margin: -15px 0 10px 0;
 }
 
@@ -187,24 +204,31 @@ html, body {
     margin: 0;
 }
 
+/* BOTÓN FORJADO EN COBRE CON EXTRUSIÓN Y SOMBRAS DE RELIEVE */
 .boton-descarga {
     display: inline-block;
-    border: 1px solid #ffffff; /* Borde blanco fino */
+    background: linear-gradient(135deg, #b87333 0%, #6e401b 100%);
+    border: 1px solid #f3af7b;
     color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 13px 20px;
     font-size: 0.8rem;
     letter-spacing: 2px;
     font-weight: bold;
     text-align: center;
-    transition: all 0.3s;
+    border-radius: 4px;
+    transition: all 0.3s ease;
     margin-top: 10px;
-    background: transparent;
+    /* El truco del relieve 3D: Luz arriba, oscuridad abajo */
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3), inset -1px -1px 3px rgba(0,0,0,0.6), 0px 4px 8px rgba(0,0,0,0.4);
 }
 
     .boton-descarga:hover {
-        background: #ffffff; /* Relleno blanco al pasar el ratón */
-        color: #000000; /* Texto negro */
+        /* Invierte el metalizado al pasar el ratón creando un efecto reflectante interactivo */
+        background: linear-gradient(135deg, #db8f4f 0%, #b87333 100%);
+        box-shadow: inset 1px 1px 4px rgba(255,255,255,0.5), inset -1px -1px 2px rgba(0,0,0,0.4), 0px 2px 4px rgba(0,0,0,0.6);
+        transform: translateY(1px);
     }
 
 /* ===================================================
@@ -216,12 +240,11 @@ html, body {
     padding: 0 20px;
 }
 
-/* Estilo común y base de las tarjetas de los posts */
 .post-tarjeta {
     margin-bottom: 50px;
     padding: 35px;
     border-radius: 8px;
-    background: #1e1e1e; /* Fondo de tarjeta gris oscuro integrado */
+    background: #1e1e1e;
     border: 1px solid #2d2d2d;
     transition: transform 0.2s ease;
 }
@@ -247,12 +270,10 @@ html, body {
     }
 
     /* ===================================================
-   6. BORDES SUTILES POR ESTACIÓN EN LAS TARJETAS
+   6. BORDES METALIZADOS SUTILES POR ESTACIÓN
    =================================================== */
-
-    /* 🌸 Tarjetas publicadas en Primavera */
     .post-tarjeta.tarjeta-primavera {
-        border-left: 5px solid #444444; /* Gris intermedio serio */
+        border-left: 5px solid #a3b899;
     }
 
 .tarjeta-primavera .post-titulo {
@@ -265,9 +286,10 @@ html, body {
     font-style: italic;
 }
 
-/* ☀️ Tarjetas publicadas en Verano */
+/* En verano la tarjeta adquiere la moldura de cobre puro de la cabecera */
 .post-tarjeta.tarjeta-verano {
-    border-left: 5px solid #555555; /* Gris ligeramente más claro */
+    border-left: 5px solid #b87333;
+    box-shadow: inset 2px 0px 5px rgba(184, 115, 51, 0.2);
 }
 
 .tarjeta-verano .post-titulo {
@@ -280,9 +302,8 @@ html, body {
     font-style: italic;
 }
 
-/* 🍂 Tarjetas publicadas en Otoño */
 .post-tarjeta.tarjeta-otono {
-    border-left: 5px solid #333333; /* Gris grafito profundo */
+    border-left: 5px solid #8c6239;
 }
 
 .tarjeta-otono .post-titulo {
@@ -295,9 +316,8 @@ html, body {
     font-style: italic;
 }
 
-/* ❄️ Tarjetas publicadas en Invierno */
 .post-tarjeta.tarjeta-invierno {
-    border-left: 5px solid #666666; /* Gris platino/pizarra */
+    border-left: 5px solid #4a5568;
 }
 
 .tarjeta-invierno .post-titulo {
