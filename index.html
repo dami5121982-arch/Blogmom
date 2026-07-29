@@ -6,22 +6,75 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+    <div class="pantalla-dividida">
 
-    <!-- Tu cabecera actual -->
-    <h1>Mara Rosanegra</h1>
-    <nav>Inicio Contacto</nav>
+        <!-- COLUMNA 1: MENÚ IZQUIERDO -->
+        <aside class="menu-lateral">
+            <div class="logotipo">
+                MARA<br>ROSANEGRA
+            </div>
+            <nav class="navegacion-vertical">
+                <a href="#" class="active">INICIO</a>
+                <a href="#">BIOGRAFÍA</a>
+                <a href="#">POEMAS</a>
+                <a href="#">CONTACTO</a>
+            </nav>
+            <div class="redes-sociales">
+                <!-- Aquí puedes meter iconos o enlaces cortos si quieres -->
+            </div>
+        </aside>
 
-    <h2>Bienvenidos a mi rincón literario</h2>
-    <p>Historias, reflexiones y poesía envueltas en misterio.</p>
+        <!-- COLUMNA 2: FOTO CENTRAL EN BLANCO Y NEGRO -->
+        <main class="seccion-foto-central">
+            <div class="imagen-fondo-autor">
+                <!-- Pon aquí la foto de tu madre dentro de la carpeta img -->
+                <img src="img/foto-madre.jpg" alt="Mara Rosanegra">
+            </div>
+            <div class="texto-superpuesto-foto">
+                <h1>HOLA, SOY<br>MARA ROSANEGRA</h1>
+                <p>ESCRITORA / POETA</p>
+            </div>
+            <div class="puntos-carrusel">
+                <span>•</span><span class="activo">•</span><span>•</span>
+            </div>
+        </main>
 
-    <!-- AQUÍ SE ENRAZARÁN LOS POSTS (Asegúrate de añadir este div) -->
+        <!-- COLUMNA 3: INFORMACIÓN DE LA DERECHA -->
+        <section class="seccion-acerca-de">
+            <h2>SOBRE MÍ</h2>
+            <hr class="linea-decorativa">
+
+            <ul class="datos-personales">
+                <li><strong>Nombre:</strong> Mara Rosanegra</li>
+                <li><strong>Estilo:</strong> Prosa poética y misterio</li>
+                <li><strong>Nacionalidad:</strong> Española</li>
+            </ul>
+
+            <h3>PERFIL PROFESIONAL</h3>
+            <p class="descripcion-perfil">
+                Bienvenidos a este espacio de resguardo literario. Aquí se reúnen años de hilos impresos,
+                historias hiladas a mano, reflexiones y poesía envueltas en misterio. Cada rincón evoca
+                la memoria de los días y la metamorfosis de las palabras a través de las estaciones.
+            </p>
+
+            <a href="#" class="boton-descarga">DESCARGAR ANTOLOGÍA PDF</a>
+
+            <!-- Firma elegante opcional -->
+            <div class="firma-autora">
+                <span style="font-family: 'Georgia', serif; font-style: italic; color: #888; font-size: 1.5rem;">Mara Rosanegra</span>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Las historias aparecerán debajo de esta gran cabecera -->
     <div id="contenedor-posts"></div>
 
     <footer>© 2026 Mara Rosanegra. Todos los derechos reservados.</footer>
 
     <!-- VINCULACIÓN DE ARCHIVOS: Importante el orden -->
     <script src="blog-data.js"></script>
-    <script src="app.js?v=12"></script>  <!-- <-- Añade ?v=2 al final -->
+    <script src="app.js?v=14"></script>  <!-- <-- Añade ?v=2 al final -->
 
 </body>
 </html>

@@ -171,3 +171,230 @@ body {
     color: #a0aec0;
     font-style: italic;
 }
+/* ===================================================
+   DISEÑO ESTILO PORTAFOLIO OSCURO (ANDREW SMITH)
+   =================================================== */
+
+/* Estilos Generales para resetear la página */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #111111;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+}
+
+/* Contenedor maestro dividido en 3 columnas */
+.pantalla-dividida {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Ocupa toda la pantalla visible */
+    background: #111111;
+    border-bottom: 2px solid #222;
+}
+
+/* 1. ESTILO MENÚ LATERAL IZQUIERDO */
+.menu-lateral {
+    width: 15%;
+    background: #000000;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #1a1a1a;
+}
+
+.logotipo {
+    background: #d46a7f; /* Color vino/rosa quemado serio */
+    color: #fff;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.navegacion-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: -50px;
+}
+
+    .navegacion-vertical a {
+        color: #555555;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        transition: color 0.3s;
+    }
+
+        .navegacion-vertical a:hover, .navegacion-vertical a.active {
+            color: #d46a7f; /* Color de contraste cuando pasas el ratón */
+        }
+
+/* 2. ESTILO COLUMNA CENTRAL CON LA FOTO */
+.seccion-foto-central {
+    width: 55%;
+    position: relative;
+    height: 100%;
+    background: #080808;
+    overflow: hidden;
+}
+
+.imagen-fondo-autor {
+    width: 100%;
+    height: 100%;
+}
+
+    .imagen-fondo-autor img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%) contrast(120%) brightness(80%); /* Blanco y negro dramático */
+    }
+
+.texto-superpuesto-foto {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    z-index: 2;
+}
+
+    .texto-superpuesto-foto h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        line-height: 1.1;
+        letter-spacing: 2px;
+        margin: 0 0 15px 0;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .texto-superpuesto-foto p {
+        font-size: 0.9rem;
+        letter-spacing: 4px;
+        color: #888;
+        border-top: 1px solid #444;
+        padding-top: 10px;
+        display: inline-block;
+    }
+
+.puntos-carrusel {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #444;
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+}
+
+    .puntos-carrusel span.activo {
+        color: #fff;
+    }
+
+/* 3. ESTILO COLUMNA DERECHA (ABOUT) */
+.seccion-acerca-de {
+    width: 30%;
+    background: #222222;
+    padding: 50px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: auto; /* Permite scroll interno si hay mucho texto */
+}
+
+    .seccion-acerca-de h2 {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+        color: #ffffff;
+        margin: 0;
+    }
+
+.linea-decorativa {
+    width: 50px;
+    border: 1px solid #d46a7f;
+    margin: -15px 0 10px 0;
+}
+
+.datos-personales {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #aaaaaa;
+}
+
+    .datos-personales strong {
+        color: #ffffff;
+    }
+
+.seccion-acerca-de h3 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: #888888;
+    margin: 20px 0 0 0;
+    text-transform: uppercase;
+}
+
+.descripcion-perfil {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #cccccc;
+    margin: 0;
+}
+
+.boton-descarga {
+    display: inline-block;
+    border: 1px solid #d46a7f;
+    color: #d46a7f;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+    .boton-descarga:hover {
+        background: #d46a7f;
+        color: #fff;
+    }
+
+/* DISEÑO PARA LOS POEMAS ABAJO DE LA CABECERA */
+#contenedor-posts {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* Adaptación responsive para pantallas pequeñas */
+@media (max-width: 1000px) {
+    .pantalla-dividida {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .menu-lateral, .seccion-foto-central, .seccion-acerca-de {
+        width: 100%;
+        height: auto;
+    }
+
+    .seccion-foto-central {
+        height: 450px;
+    }
+
+    .navegacion-vertical {
+        flex-direction: row;
+        margin: 20px 0;
+        justify-content: center;
+    }
+}
