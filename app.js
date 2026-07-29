@@ -2,35 +2,31 @@
     const contenedor = document.getElementById("contenedor-posts");
 
     if (typeof dataBlogger !== "undefined") {
-        // Buscamos dónde están los posts automáticamente si cambiaste la estructura
         const feed = dataBlogger.feed || dataBlogger;
         const posts = feed.entry || feed.posts || feed;
 
         if (Array.isArray(posts)) {
-            contenedor.innerHTML = ""; // Limpiamos el contenedor
+            contenedor.innerHTML = ""; // Limpiar contenedor
 
-            posts.forEach((post, index) => {
-                // Dejamos un rastro en la consola para espiar la estructura real del primer post
-                if (index === 0) console.log("Estructura del primer post encontrado:", post);
-
-                // 1. Extracción ultra-segura del TÍTULO
+            posts.forEach(post => {
+                // 1. Extraer TÍTULO (Tu conversor lo deja como texto directo o dentro de .text)
                 let titulo = "Sin título";
                 if (post.title) {
                     if (typeof post.title === "string") titulo = post.title;
-                    else if (post.title._text) titulo = post.title._text;
+                    else if (post.title.text) titulo = post.title.text;
                     else if (post.title.$t) titulo = post.title.$t;
                 }
 
-                // 2. Extracción ultra-segura del CONTENIDO
+                // 2. Extraer CONTENIDO (Tu conversor usa la propiedad exacta .text)
                 let contenido = "";
                 const cuerpo = post.content || post.summary || post.body;
                 if (cuerpo) {
                     if (typeof cuerpo === "string") contenido = cuerpo;
-                    else if (cuerpo._text) contenido = cuerpo._text;
+                    else if (cuerpo.text) contenido = cuerpo.text; // <-- Clave de tu conversor
                     else if (cuerpo.$t) contenido = cuerpo.$t;
                 }
 
-                // 3. Crear y pintar la tarjeta en la página web
+                // 3. Crear la tarjeta e inyectarla
                 const postElement = document.createElement("article");
                 postElement.className = "post-tarjeta";
 
@@ -43,9 +39,9 @@
                 contenedor.appendChild(postElement);
             });
         } else {
-            contenedor.innerHTML = "<p>El archivo de datos no contiene una lista válida de entradas.</p>";
+            contenedor.innerHTML = "<p>El archivo de datos no contiene una lista de entradas válida.</p>";
         }
     } else {
-        contenedor.innerHTML = "<p>No se pudo encontrar la variable global dataBlogger.</p>";
+        contenedor.innerHTML = "<p>No se pudo encontrar la variable dataBlogger.</p>";
     }
 });
