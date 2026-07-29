@@ -108,12 +108,17 @@ html, body {
 }
 
     .texto-superpuesto-foto h1 {
-        font-size: 2.8rem;
-        font-weight: bold;
-        line-height: 1.1;
-        letter-spacing: 2px;
+        font-family: 'Impact', 'Arial Black', sans-serif; /* Usamos una fuente que de por sí ya es alta y compacta */
+        font-size: 4rem; /* Hacemos las letras más grandes */
+        font-weight: 900;
+        line-height: 0.9; /* Pegamos las líneas verticalmente para que queden compactas */
         margin: 0 0 15px 0;
-        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+        /* El truco definitivo para estirar las letras hacia arriba */
+        display: block;
+        transform: scaleY(1.6); /* Estira el texto un 60% más hacia lo alto */
+        transform-origin: left bottom; /* Asegura que se estiren desde la base sin descolocarse */
+        letter-spacing: -1px; /* Junta un poquito las letras horizontalmente para estilizar el efecto */
     }
 
     .texto-superpuesto-foto p {
