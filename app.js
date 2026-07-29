@@ -1,45 +1,51 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     const contenedor = document.getElementById("contenedor-posts");
 
-    if (typeof dataBlogger !== "undefined" && dataBlogger.feed && dataBlogger.feed.entry) {
-        const posts = dataBlogger.feed.entry;
+    if (typeof dataBlogger !== "undefined") {
+        // Buscamos dónde están los posts automáticamente si cambiaste la estructura
+        const feed = dataBlogger.feed || dataBlogger;
+        const posts = feed.entry || feed.posts || feed;
 
-        posts.forEach(post => {
-            // 1. Buscamos el título intentando varias rutas posibles del conversor
-            let titulo = "Sin título";
-            if (post.title) {
-                if (typeof post.title === "string") titulo = post.title;
-                else if (post.title.$t) titulo = post.title.$t;
-                else if (post.title._text) titulo = post.title._text;
-            }
+        if (Array.isArray(posts)) {
+            contenedor.innerHTML = ""; // Limpiamos el contenedor
 
-            // 2. Buscamos el contenido intentando varias rutas posibles del conversor
-            let contenido = "";
-            if (post.content) {
-                if (typeof post.content === "string") contenido = post.content;
-                else if (post.content.$t) contenido = post.content.$t;
-                else if (post.content._text) contenido = post.content._text;
-            }
-            // Si viene guardado como 'summary' en vez de 'content'
-            else if (post.summary) {
-                if (typeof post.summary === "string") contenido = post.summary;
-                else if (post.summary.$t) contenido = post.summary.$t;
-                else if (post.summary._text) contenido = post.summary._text;
-            }
+            posts.forEach((post, index) => {
+                // Dejamos un rastro en la consola para espiar la estructura real del primer post
+                if (index === 0) console.log("Estructura del primer post encontrado:", post);
 
-            // 3. Crear la tarjeta si el post contiene algo de información
-            const postElement = document.createElement("article");
-            postElement.className = "post-tarjeta";
+                // 1. Extracción ultra-segura del TÍTULO
+                let titulo = "Sin título";
+                if (post.title) {
+                    if (typeof post.title === "string") titulo = post.title;
+                    else if (post.title._text) titulo = post.title._text;
+                    else if (post.title.$t) titulo = post.title.$t;
+                }
 
-            postElement.innerHTML = `
-                <h3 class="post-titulo">${titulo}</h3>
-                <div class="post-contenido">${contenido}</div>
-                <hr>
-            `;
+                // 2. Extracción ultra-segura del CONTENIDO
+                let contenido = "";
+                const cuerpo = post.content || post.summary || post.body;
+                if (cuerpo) {
+                    if (typeof cuerpo === "string") contenido = cuerpo;
+                    else if (cuerpo._text) contenido = cuerpo._text;
+                    else if (cuerpo.$t) contenido = cuerpo.$t;
+                }
 
-            contenedor.appendChild(postElement);
-        });
+                // 3. Crear y pintar la tarjeta en la página web
+                const postElement = document.createElement("article");
+                postElement.className = "post-tarjeta";
+
+                postElement.innerHTML = `
+                    <h3 class="post-titulo">${titulo}</h3>
+                    <div class="post-contenido">${contenido}</div>
+                    <hr>
+                `;
+
+                contenedor.appendChild(postElement);
+            });
+        } else {
+            contenedor.innerHTML = "<p>El archivo de datos no contiene una lista válida de entradas.</p>";
+        }
     } else {
-        contenedor.innerHTML = "<p>No se pudieron cargar las entradas del blog o el archivo de datos está vacío.</p>";
+        contenedor.innerHTML = "<p>No se pudo encontrar la variable global dataBlogger.</p>";
     }
 });
