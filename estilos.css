@@ -66,3 +66,36 @@ body {
     font-size: 0.9rem;
     border-top: 1px solid var(--border-color);
 }
+#contenedor-posts {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.post-tarjeta {
+    background: #fff;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.post-titulo {
+    color: #800020; /* Color vino/borgoña como tu cabecera */
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif;
+}
+
+.post-contenido {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+    .post-contenido img {
+        max-width: 100%; /* Evita que las imágenes se salgan de la pantalla */
+        height: auto;
+        display: block;
+        margin: 20px auto;
+        border-radius: 4px;
+    }
