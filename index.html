@@ -35,10 +35,10 @@
 
     <!-- Script Ultra-Resistente para Blogger JSON -->
     <script>
-        fetch('posts.json')
+        fetch('blog.json')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("No se pudo leer el archivo posts.json");
+                    throw new Error("No se pudo leer el archivo blog.json");
                 }
                 return response.json();
             })
