@@ -1,4 +1,4 @@
-{
+﻿const dataBlogger = {
 	"feed": {
 		"id": "tag:blogger.com,1999:blog-5988492047534887159",
 		"title": "Rosa negra",
@@ -45325,4 +45325,4 @@
 		"_xmlns": "http://www.w3.org/2005/Atom",
 		"_xmlns:blogger": "http://schemas.google.com/blogger/2018"
 	}
-}
+};
