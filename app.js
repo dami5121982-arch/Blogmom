@@ -1,24 +1,33 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     const contenedor = document.getElementById("contenedor-posts");
 
-    // Comprobamos si los datos del blog existen
     if (typeof dataBlogger !== "undefined" && dataBlogger.feed && dataBlogger.feed.entry) {
         const posts = dataBlogger.feed.entry;
 
         posts.forEach(post => {
-            // 1. Extraer el título del post
-            const titulo = post.title && post.title.$t ? post.title.$t : "Sin título";
-
-            // 2. Extraer el contenido del post (texto/html)
-            let contenido = post.content && post.content.$t ? post.content.$t : "";
-
-            // Opcional: Si el post es un borrador (DRAFT), podemos decidir saltárnoslo
-            if (post['blogger:status'] && post['blogger:status'].$t === "DRAFT") {
-                // Si quieres ocultar borradores, descomenta la siguiente línea:
-                // return;
+            // 1. Buscamos el título intentando varias rutas posibles del conversor
+            let titulo = "Sin título";
+            if (post.title) {
+                if (typeof post.title === "string") titulo = post.title;
+                else if (post.title.$t) titulo = post.title.$t;
+                else if (post.title._text) titulo = post.title._text;
             }
 
-            // 3. Crear la estructura HTML para la tarjeta del post
+            // 2. Buscamos el contenido intentando varias rutas posibles del conversor
+            let contenido = "";
+            if (post.content) {
+                if (typeof post.content === "string") contenido = post.content;
+                else if (post.content.$t) contenido = post.content.$t;
+                else if (post.content._text) contenido = post.content._text;
+            }
+            // Si viene guardado como 'summary' en vez de 'content'
+            else if (post.summary) {
+                if (typeof post.summary === "string") contenido = post.summary;
+                else if (post.summary.$t) contenido = post.summary.$t;
+                else if (post.summary._text) contenido = post.summary._text;
+            }
+
+            // 3. Crear la tarjeta si el post contiene algo de información
             const postElement = document.createElement("article");
             postElement.className = "post-tarjeta";
 
@@ -28,11 +37,9 @@
                 <hr>
             `;
 
-            // 4. Inyectarlo en la página web
             contenedor.appendChild(postElement);
         });
     } else {
         contenedor.innerHTML = "<p>No se pudieron cargar las entradas del blog o el archivo de datos está vacío.</p>";
     }
 });
-
