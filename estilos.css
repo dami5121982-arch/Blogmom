@@ -374,3 +374,21 @@ nav, .navegacion-vertical {
         gap: 15px;
     }
 }
+/* ===================================================
+   BLOQUEADOR DE CAJAS FANTASMA (DE BLOG-DATA.JS)
+   =================================================== */
+.menu-lateral div:not(.logotipo),
+.menu-lateral section,
+.menu-lateral ul,
+.menu-lateral li,
+.menu-lateral span {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+}
