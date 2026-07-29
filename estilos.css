@@ -1,181 +1,6 @@
-﻿:root {
-    --bg-color: #fcfbfa; /* Fondo crema suave para lectura */
-    --text-color: #2c2523; /* Texto oscuro */
-    --accent-color: #721c24; /* Detalle rosa negra / vino */
-    --card-bg: #ffffff;
-    --border-color: #e9e5e2;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Georgia', serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-}
-
-.main-header {
-    text-align: center;
-    padding: 30px 20px;
-    background-color: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.logo {
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: var(--accent-color);
-    letter-spacing: 1px;
-}
-
-.container {
-    max-width: 800px; /* Ancho óptimo de lectura */
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.post-card {
-    background-color: var(--card-bg);
-    padding: 30px;
-    margin-bottom: 40px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-}
-
-    .post-card h2 {
-        font-size: 1.8rem;
-        color: var(--text-color);
-        margin-bottom: 15px;
-    }
-
-/* Control estricto de imágenes para que no se desborden en el móvil */
-.contenido-relato img {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block;
-    margin: 20px auto;
-    border-radius: 4px;
-}
-
-.main-footer {
-    text-align: center;
-    padding: 30px;
-    color: #777;
-    font-size: 0.9rem;
-    border-top: 1px solid var(--border-color);
-}
-#contenedor-posts {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.post-tarjeta {
-    background: #fff;
-    margin-bottom: 40px;
-    padding: 20px;
-    border-radius: 4px;
-}
-
-.post-titulo {
-    color: #800020; /* Color vino/borgoña como tu cabecera */
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    font-family: 'Georgia', serif;
-}
-
-.post-contenido {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-    .post-contenido img {
-        max-width: 100%; /* Evita que las imágenes se salgan de la pantalla */
-        height: auto;
-        display: block;
-        margin: 20px auto;
-        border-radius: 4px;
-    }
-/* Estilo base común para todas las tarjetas */
-.post-tarjeta {
-    margin-bottom: 50px;
-    padding: 35px;
-    border-radius: 8px;
-    background: #ffffff;
-    transition: transform 0.2s ease;
-}
-
-    /* 🌸 Tarjetas de Primavera */
-    .post-tarjeta.tarjeta-primavera {
-        border-left: 5px solid #e8b4b8;
-        box-shadow: 0 4px 20px rgba(232, 180, 184, 0.15);
-    }
-
-.tarjeta-primavera .post-titulo {
-    color: #d46a7f;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-primavera .post-fecha {
-    color: #8fa89b;
-    font-style: italic;
-}
-
-/* ☀️ Tarjetas de Verano */
-.post-tarjeta.tarjeta-verano {
-    border-left: 5px solid #e0b094;
-    box-shadow: 0 4px 20px rgba(224, 176, 148, 0.15);
-}
-
-.tarjeta-verano .post-titulo {
-    color: #c87d55;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-verano .post-fecha {
-    color: #a89f91;
-    font-style: italic;
-}
-
-/* 🍂 Tarjetas de Otoño */
-.post-tarjeta.tarjeta-otono {
-    border-left: 5px solid #cd853f;
-    box-shadow: 0 4px 20px rgba(205, 133, 63, 0.15);
-}
-
-.tarjeta-otono .post-titulo {
-    color: #a0522d;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-otono .post-fecha {
-    color: #8d7b68;
-    font-style: italic;
-}
-
-/* ❄️ Tarjetas de Invierno */
-.post-tarjeta.tarjeta-invierno {
-    border-left: 5px solid #718096;
-    box-shadow: 0 4px 20px rgba(113, 128, 150, 0.1);
-}
-
-.tarjeta-invierno .post-titulo {
-    color: #4a5568;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-invierno .post-fecha {
-    color: #a0aec0;
-    font-style: italic;
-}
-/* ===================================================
-   DISEÑO ESTILO PORTAFOLIO OSCURO (ANDREW SMITH)
+﻿/* ===================================================
+   1. ESTILOS GENERALES Y RESETEO (ESTILO OSCURO)
    =================================================== */
-
-/* Estilos Generales para resetear la página */
 html, body {
     margin: 0;
     padding: 0;
@@ -184,7 +9,7 @@ html, body {
     color: #ffffff;
 }
 
-/* Contenedor maestro dividido en 3 columnas */
+/* Contenedor maestro de la cabecera dividido en 3 columnas */
 .pantalla-dividida {
     display: flex;
     width: 100%;
@@ -193,7 +18,9 @@ html, body {
     border-bottom: 2px solid #222;
 }
 
-/* 1. ESTILO MENÚ LATERAL IZQUIERDO */
+/* ===================================================
+   2. COLUMNA 1: MENÚ LATERAL IZQUIERDO
+   =================================================== */
 .menu-lateral {
     width: 15%;
     background: #000000;
@@ -202,17 +29,19 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px solid #1a1a1a;
+    box-sizing: border-box;
 }
 
 .logotipo {
-    background: #d46a7f; /* Color vino/rosa quemado serio */
-    color: #fff;
+    background: #252525; /* Gris oscuro serio y sobrio */
+    color: #ffffff;
     padding: 15px;
     font-weight: bold;
     font-size: 1.1rem;
     line-height: 1.2;
     letter-spacing: 1px;
     text-align: center;
+    border: 1px solid #333333;
 }
 
 .navegacion-vertical {
@@ -231,11 +60,15 @@ html, body {
         transition: color 0.3s;
     }
 
-        .navegacion-vertical a:hover, .navegacion-vertical a.active {
-            color: #d46a7f; /* Color de contraste cuando pasas el ratón */
+        /* Enlaces activos o al pasar el ratón: Blanco puro */
+        .navegacion-vertical a:hover,
+        .navegacion-vertical a.active {
+            color: #ffffff;
         }
 
-/* 2. ESTILO COLUMNA CENTRAL CON LA FOTO */
+/* ===================================================
+   3. COLUMNA 2: SECCIÓN FOTO CENTRAL DRAMÁTICA
+   =================================================== */
 .seccion-foto-central {
     width: 55%;
     position: relative;
@@ -253,7 +86,8 @@ html, body {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: grayscale(100%) contrast(120%) brightness(80%); /* Blanco y negro dramático */
+        /* Fuerza el blanco y negro artístico con alto contraste */
+        filter: grayscale(100%) contrast(120%) brightness(80%);
     }
 
 .texto-superpuesto-foto {
@@ -275,36 +109,39 @@ html, body {
     .texto-superpuesto-foto p {
         font-size: 0.9rem;
         letter-spacing: 4px;
-        color: #888;
-        border-top: 1px solid #444;
+        color: #888888;
+        border-top: 1px solid #333333;
         padding-top: 10px;
         display: inline-block;
     }
 
 .puntos-carrusel {
     position: absolute;
-    bottom: 5px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    color: #444;
+    color: #444444;
     font-size: 1.5rem;
     letter-spacing: 5px;
 }
 
     .puntos-carrusel span.activo {
-        color: #fff;
+        color: #ffffff;
     }
 
-/* 3. ESTILO COLUMNA DERECHA (ABOUT) */
+/* ===================================================
+   4. COLUMNA 3: INFORMACIÓN DE LA DERECHA (SOBRE MÍ)
+   =================================================== */
 .seccion-acerca-de {
     width: 30%;
-    background: #222222;
+    background: #1a1a1a;
     padding: 50px 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    overflow-y: auto; /* Permite scroll interno si hay mucho texto */
+    overflow-y: auto; /* Scroll si el texto es muy largo */
+    border-left: 1px solid #252525;
 }
 
     .seccion-acerca-de h2 {
@@ -316,7 +153,7 @@ html, body {
 
 .linea-decorativa {
     width: 50px;
-    border: 1px solid #d46a7f;
+    border: 1px solid #666666; /* Gris platino minimalista */
     margin: -15px 0 10px 0;
 }
 
@@ -352,8 +189,8 @@ html, body {
 
 .boton-descarga {
     display: inline-block;
-    border: 1px solid #d46a7f;
-    color: #d46a7f;
+    border: 1px solid #ffffff; /* Borde blanco fino */
+    color: #ffffff;
     text-decoration: none;
     padding: 12px 20px;
     font-size: 0.8rem;
@@ -362,21 +199,120 @@ html, body {
     text-align: center;
     transition: all 0.3s;
     margin-top: 10px;
+    background: transparent;
 }
 
     .boton-descarga:hover {
-        background: #d46a7f;
-        color: #fff;
+        background: #ffffff; /* Relleno blanco al pasar el ratón */
+        color: #000000; /* Texto negro */
     }
 
-/* DISEÑO PARA LOS POEMAS ABAJO DE LA CABECERA */
+/* ===================================================
+   5. CONTENEDOR DE HISTORIAS Y POEMAS (ABAJO)
+   =================================================== */
 #contenedor-posts {
     max-width: 800px;
     margin: 60px auto;
     padding: 0 20px;
 }
 
-/* Adaptación responsive para pantallas pequeñas */
+/* Estilo común y base de las tarjetas de los posts */
+.post-tarjeta {
+    margin-bottom: 50px;
+    padding: 35px;
+    border-radius: 8px;
+    background: #1e1e1e; /* Fondo de tarjeta gris oscuro integrado */
+    border: 1px solid #2d2d2d;
+    transition: transform 0.2s ease;
+}
+
+    .post-tarjeta .post-contenido {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: #dddddd;
+    }
+
+        .post-tarjeta .post-contenido img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
+    .post-tarjeta hr {
+        border: 0;
+        border-top: 1px solid #333333;
+        margin-top: 30px;
+    }
+
+    /* ===================================================
+   6. BORDES SUTILES POR ESTACIÓN EN LAS TARJETAS
+   =================================================== */
+
+    /* 🌸 Tarjetas publicadas en Primavera */
+    .post-tarjeta.tarjeta-primavera {
+        border-left: 5px solid #5a4b51; /* Borgoña marchito/grisáceo apagado */
+    }
+
+.tarjeta-primavera .post-titulo {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+}
+
+.tarjeta-primavera .post-fecha {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* ☀️ Tarjetas publicadas en Verano */
+.post-tarjeta.tarjeta-verano {
+    border-left: 5px solid #6e584f; /* Ocre/terracota apagado y profundo */
+}
+
+.tarjeta-verano .post-titulo {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+}
+
+.tarjeta-verano .post-fecha {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* 🍂 Tarjetas publicadas en Otoño */
+.post-tarjeta.tarjeta-otono {
+    border-left: 5px solid #5d4037; /* Marrón tierra oscuro */
+}
+
+.tarjeta-otono .post-titulo {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+}
+
+.tarjeta-otono .post-fecha {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* ❄️ Tarjetas publicadas en Invierno */
+.post-tarjeta.tarjeta-invierno {
+    border-left: 5px solid #4a5568; /* Gris pizarra invernal */
+}
+
+.tarjeta-invierno .post-titulo {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+}
+
+.tarjeta-invierno .post-fecha {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* ===================================================
+   7. ADAPTACIÓN PARA MÓVILES (RESPONSIVE)
+   =================================================== */
 @media (max-width: 1000px) {
     .pantalla-dividida {
         flex-direction: column;
@@ -396,5 +332,6 @@ html, body {
         flex-direction: row;
         margin: 20px 0;
         justify-content: center;
+        gap: 15px;
     }
 }
