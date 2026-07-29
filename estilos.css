@@ -252,7 +252,7 @@ html, body {
 
     /* 🌸 Tarjetas publicadas en Primavera */
     .post-tarjeta.tarjeta-primavera {
-        border-left: 5px solid #5a4b51; /* Borgoña marchito/grisáceo apagado */
+        border-left: 5px solid #444444; /* Gris intermedio serio */
     }
 
 .tarjeta-primavera .post-titulo {
@@ -267,7 +267,7 @@ html, body {
 
 /* ☀️ Tarjetas publicadas en Verano */
 .post-tarjeta.tarjeta-verano {
-    border-left: 5px solid #6e584f; /* Ocre/terracota apagado y profundo */
+    border-left: 5px solid #555555; /* Gris ligeramente más claro */
 }
 
 .tarjeta-verano .post-titulo {
@@ -282,7 +282,7 @@ html, body {
 
 /* 🍂 Tarjetas publicadas en Otoño */
 .post-tarjeta.tarjeta-otono {
-    border-left: 5px solid #5d4037; /* Marrón tierra oscuro */
+    border-left: 5px solid #333333; /* Gris grafito profundo */
 }
 
 .tarjeta-otono .post-titulo {
@@ -297,7 +297,7 @@ html, body {
 
 /* ❄️ Tarjetas publicadas en Invierno */
 .post-tarjeta.tarjeta-invierno {
-    border-left: 5px solid #4a5568; /* Gris pizarra invernal */
+    border-left: 5px solid #666666; /* Gris platino/pizarra */
 }
 
 .tarjeta-invierno .post-titulo {
