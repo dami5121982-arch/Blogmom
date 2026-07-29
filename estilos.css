@@ -108,19 +108,18 @@ html, body {
 }
 
     .texto-superpuesto-foto h1 {
-        font-family: 'Arial Narrow', 'Century Gothic', sans-serif; /* Fuentes de trazo limpio y fino */
+        font-family: 'Arial Narrow', 'Century Gothic', sans-serif !important; /* Trazo limpio y fino */
         font-size: 3.5rem;
-        font-weight: 300; /* Fuerza al navegador a usar el trazo más fino posible */
+        font-weight: 300 !important; /* ¡OBLIGA a que la letra sea ultra fina! */
         line-height: 1;
         margin: 0 0 15px 0;
         text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
         text-transform: uppercase;
-        /* Efecto de estiramiento vertical */
+        /* Estiramiento vertical masivo */
         display: block;
-        transform: scaleY(1.8); /* Estira las letras un 80% hacia arriba */
+        transform: scaleY(1.9) !important; /* Estira las letras casi al doble de alto */
         transform-origin: left bottom;
-        /* Separación de las letras */
-        letter-spacing: 3px; /* Separa un poco las letras horizontalmente para que respiren y se vean más finas */
+        letter-spacing: 4px !important; /* Espaciado elegante */
     }
 
 
