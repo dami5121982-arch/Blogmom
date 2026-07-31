@@ -618,3 +618,44 @@ SISTEMA DE ICONOS VECTORIALES (SVG) COLOR COBRE
         /* Genera el destello neón color cobre */
         filter: drop-shadow(0px 0px 6px rgba(184, 115, 51, 0.9)) !important;
     }
+/* ===================================================
+PARCHE DE COLOR COBRE EXACTO MEDIANTE MÁSCARA CSS
+=================================================== */
+.contenedor-firma {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 15px !important;
+    margin-bottom: 45px !important; /* Mantiene la firma levantada del borde */
+    padding-bottom: 10px !important;
+}
+
+.firma-autor {
+    width: 150px !important;
+    height: 65px !important;
+    display: block !important;
+    /* 1. MÁSCARA ABREVIADA WEBKIT (Soporte Safari/móviles sin activar advertencias en VS) */
+    -webkit-mask: url('img/firmamarasf.png') no-repeat center / contain !important;
+    /* 2. MÁSCARA ESTÁNDAR OFICIAL (Para Chrome, Firefox y Edge) */
+    mask-image: url('img/firmamarasf.png') !important;
+    mask-size: contain !important;
+    mask-repeat: no-repeat !important;
+    mask-position: center !important;
+    /* 3. COLOR COBRE REAL */
+    background-color: #b87333 !important;
+    filter: none !important;
+    opacity: 0.85 !important;
+    transition: background-color 0.3s ease, filter 0.3s ease, transform 0.3s ease !important;
+}
+
+    /* Efecto hover interactivo unificado con el menú */
+    .firma-autor:hover {
+        opacity: 1 !important;
+        transform: scale(1.04) !important;
+        /* Al pasar el ratón, el fondo del molde cambia a un cobre más claro/brillante */
+        background-color: #db8f4f !important;
+        /* Proyecta el mismo destello neón color cobre que tienen los elementos de tu menú */
+        filter: drop-shadow(0px 0px 8px rgba(184, 115, 51, 0.95)) !important;
+    }
+
+
