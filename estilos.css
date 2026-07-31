@@ -11,98 +11,165 @@ html, body {
 
 /* Contenedor maestro de la cabecera dividido en 3 columnas */
 .pantalla-dividida {
-    display: flex;
-    width: 100%;
-    height: 100vh; /* Ocupa toda la pantalla visible */
+    display: grid !important;
+    grid-template-columns: 20% 50% 30% !important; /* Fuerza exactitud matemática al 100% */
+    width: 100vw !important;
+    height: 100vh !important;
     background: #111111;
     border-bottom: 2px solid #222;
+    overflow: hidden !important; /* Elimina cualquier barra de scroll horizontal */
+    box-sizing: border-box !important;
 }
 
 /* ===================================================
    2. COLUMNA 1: MENÚ LATERAL IZQUIERDO (LIMPIO)
    =================================================== */
 .menu-lateral {
-    width: 15%;
+    width: 100% !important; /* Toma el 20% asignado por el Grid */
     background: #000000 !important;
-    padding: 30px 20px;
+    padding: 30px 20px !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-right: 1px solid #1a1a1a !important;
     box-sizing: border-box;
+    /* PROPIEDADES EXTRA CRÍTICAS PARA EMPUJAR LAS REDES */
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100vh !important; /* Fuerza a que ocupe todo el alto de la pantalla */
+    box-sizing: border-box !important;
+    border-right: 1px solid #1a1a1a !important;
 }
 
 .logotipo {
-    background: linear-gradient(135deg, #1f1610 0%, #110b07 100%) !important;
-    padding: 15px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    letter-spacing: 1px;
-    text-align: center;
-    border-radius: 4px;
-    background-image: linear-gradient(135deg, #f3af7b 0%, #b87333 40%, #dd9359 70%, #804c1c 100%) !important;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent !important;
-    text-shadow: 1px 1px 0px #4d2c10, -1px -1px 0px #ffeedd, 0px 4px 8px rgba(0,0,0,0.9);
-    border: 1px solid #704214 !important;
-    box-shadow: inset 1px 1px 3px rgba(255,255,255,0.1), inset -1px -1px 3px rgba(0,0,0,0.8), 0px 4px 10px rgba(0,0,0,0.5);
-    display: inline-block;
+    /* 1. DISEÑO RECTÁNGULO/CUADRADO COBRE SÓLIDO (Recuperamos el metalizado de fondo) */
+    background: linear-gradient(135deg, #b87333 0%, #804c1c 100%) !important;
+    background-color: #b87333 !important;
+    /* 2. ESPACIADO SUPERIOR DISCRETO */
+    margin-top: 25px !important;
+    padding: 20px !important;
+    /* 3. TIPOGRAFÍA EN NEGRO DE ALTO CONTRASTE */
+    font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 1px !important;
+    text-align: center !important;
+    color: #000000 !important; /* Forzamos letras negras para que se lean sobre el cobre */
+    text-transform: uppercase !important;
+    text-shadow: none !important; /* Eliminamos sombras antiguas que ensuciaban */
+    /* 4. CONFIGURACIÓN GEOMÉTRICA DE CUADRADO INDESTRUCTIBLE */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 80% !important;
+    margin-inline: auto !important; /* Lo centra horizontalmente de forma perfecta */
+    aspect-ratio: 1 / 1 !important; /* Sigue garantizando que sea un cuadrado exacto */
+    /* Reducimos un poco el padding interno para que las letras sigan encajando bien */
+    padding: 15px !important;
+    font-size: 1rem !important; /* Achicamos un punto la letra si fuera necesario */
+    box-sizing: border-box !important;
+    border-radius: 0px !important;
+    border: none !important;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.4) !important; /* Sutil sombra hacia abajo */
+    /* CAMBIA ESTO: Forzamos un halo de luz neón color cobre alrededor de todo el cuadrado */
+    box-shadow: 0px 0px 15px rgba(184, 115, 51, 0.7) !important;
+}
+    /* ===================================================
+EFECTO HOVER DE ILUMINACIÓN AVANZADA PARA EL LOGOTIPO
+=================================================== */
+    .logotipo:hover {
+        /* El halo de luz se vuelve más denso, brillante y expansivo */
+        box-shadow: 0px 0px 25px rgba(184, 115, 51, 0.95), 0px 0px 10px rgba(219, 143, 79, 0.6) !important;
+        /* Sutil efecto de relieve tridimensional (parece que flota hacia ti) */
+        transform: translateY(-3px) scale(1.02) !important;
+    }
+
+/* IMPORTANTE: Añade esta línea dentro de tu clase .logotipo base anterior 
+   para que el movimiento y el brillo no peguen un salto brusco */
+.logotipo {
+    /* ... (todos tus estilos anteriores) ... */
+    transition: box-shadow 0.3s ease, transform 0.3s ease !important;
 }
 
+
 /* Forzamos a limpiar cualquier contenedor de navegación antiguo */
+/* Contenedor del menú ajustado */
+/* Contenedor del menú ultra compacto */
 nav, .navegacion-vertical {
     display: flex !important;
     flex-direction: column !important;
-    gap: 25px !important;
-    margin-top: 40px !important;
+    gap: 0 !important;
+    margin-top: 15px !important; /* Reducido de 30px a 15px para arrimar el inicio */
     padding: 0 !important;
     background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
 }
 
-    /* Forzamos a limpiar los enlaces del menú de cualquier caja blanca */
+    /* ===================================================
+ENLACES DEL MENÚ EN COLOR COBRE BASE (ESTADO REPOSO)
+=================================================== */
     nav a, .navegacion-vertical a {
-        color: #555555 !important;
+        font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+        font-weight: 300 !important;
+        /* CAMBIA ESTO: Pasamos de gris ceniza a tu color cobre clásico */
+        color: #b87333 !important;
+        /* Añadimos un sutil reflejo inicial muy suave */
+        text-shadow: 0px 0px 4px rgba(184, 115, 51, 0.2) !important;
         text-decoration: none !important;
         font-size: 0.85rem !important;
-        font-weight: bold !important;
         letter-spacing: 2px !important;
-        transition: all 0.3s;
-        background: transparent !important; /* Quita el fondo blanco de golpe */
-        background-color: transparent !important;
-        border: none !important; /* Quita las líneas de las cajas */
-        box-shadow: none !important;
-        padding: 5px 0 !important;
+        text-transform: uppercase !important;
+        padding: 10px 0 !important;
+        border-bottom: 1px solid #181818 !important;
         display: block !important;
-        width: auto !important;
-        height: auto !important;
+        width: 100% !important;
+        text-align: center !important;
+        /* Aseguramos la transición suave para el color y el movimiento */
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
     }
 
-        /* Enlaces activos: Brillo cobre pulido */
+        /* Efecto interactivo (Hover) y sección activa: Brillo Cobre */
+        /* ===================================================
+EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
+=================================================== */
+
+        /* Estado activo y efecto al pasar el ratón (Hover) */
         nav a:hover, nav a.active,
         .navegacion-vertical a:hover, .navegacion-vertical a.active {
-            color: #f3af7b !important;
-            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.6) !important;
+            color: #ffffff !important; /* El texto se ilumina en blanco puro */
+            /* Genera el mismo destello neón metálico que tienen los iconos de abajo */
+            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.9) !important;
+            /* Pequeño desplazamiento interactivo hacia la derecha para darle dinamismo */
+            transform: translateX(4px) !important;
             background: transparent !important;
         }
+
+    /* Añadimos soporte de transición suave para el movimiento horizontal */
+    nav a, .navegacion-vertical a {
+        /* ... (Mantenemos tus propiedades de Oswald, padding y bordes intactas) ... */
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+    }
+
 
 /* ===================================================
    3. COLUMNA 2: SECCIÓN FOTO CENTRAL DRAMÁTICA
    =================================================== */
 .seccion-foto-central {
-    width: 55%;
+    width: 100% !important; /* Toma el 50% asignado por el Grid */
     position: relative;
     height: 100%;
-    background: #080808;
-    overflow: hidden;
+    background: transparent !important;
+    overflow: visible !important;
 }
-
+/* Estiramos el contenedor de la imagen para que invada el panel derecho */
 .imagen-fondo-autor {
-    width: 100%;
+    width: 160% !important; /* Se estira un 60% más para meterse debajo del panel derecho */
     height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
     .imagen-fondo-autor img {
@@ -164,16 +231,24 @@ nav, .navegacion-vertical {
 /* ===================================================
    4. COLUMNA 3: INFORMACIÓN DE LA DERECHA (SOBRE MÍ)
    =================================================== */
+/* ===================================================
+4. COLUMNA 3: TARJETA DE LA DERECHA ESTILO PORTAFOLIO (COBRE)
+=================================================== */
 .seccion-acerca-de {
-    width: 30%;
-    background: #161616;
+    width: 100% !important; /* Toma el 30% asignado por el Grid y llega al borde derecho */
+    background: rgba(230, 230, 230, 0.15) !important;
+    background-color: rgba(230, 230, 230, 0.15) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
     padding: 50px 40px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    overflow-y: auto;
-    border-left: 1px solid #252525;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 2;
 }
 
     .seccion-acerca-de h2 {
@@ -183,6 +258,7 @@ nav, .navegacion-vertical {
         margin: 0;
     }
 
+   
 /* LÍNEA DIVISORIA CON GRABADO DE COBRE METÁLICO EN TRES DIMENSIONES */
 .linea-decorativa {
     width: 60px;
@@ -193,6 +269,7 @@ nav, .navegacion-vertical {
     margin: -15px 0 10px 0;
 }
 
+/* 1. FICHA DE DATOS PERSONALES (Línea 206) */
 .datos-personales {
     list-style: none;
     padding: 0;
@@ -201,25 +278,28 @@ nav, .navegacion-vertical {
     flex-direction: column;
     gap: 12px;
     font-size: 0.9rem;
-    color: #aaaaaa;
+    color: #e5e5e5 !important; /* Subimos de gris oscuro a gris claro brillante */
 }
 
+    /* Forzamos a que los valores resalten aún más */
     .datos-personales strong {
-        color: #ffffff;
+        color: #ffffff !important; /* Blanco puro para etiquetas (Nombre, Estilo...) */
     }
 
+/* 2. SUBTÍTULO "PERFIL PROFESIONAL" (Línea 221) */
 .seccion-acerca-de h3 {
     font-size: 1rem;
     letter-spacing: 2px;
-    color: #888888;
+    color: #b87333 !important; /* Le damos el toque cobre metálico para que resalte */
     margin: 20px 0 0 0;
     text-transform: uppercase;
 }
 
+/* 3. TEXTO DESCRIPTIVO DEL PERFIL (Línea 228) */
 .descripcion-perfil {
     font-size: 0.95rem;
     line-height: 1.7;
-    color: #cccccc;
+    color: #f0f0f0 !important; /* Subimos a blanco roto para una lectura perfecta */
     margin: 0;
 }
 
@@ -375,70 +455,166 @@ nav, .navegacion-vertical {
     }
 }
 /* ===================================================
-   BLOQUEADOR DE CAJAS FANTASMA (DE BLOG-DATA.JS)
-   =================================================== */
-.menu-lateral div:not(.logotipo),
-.menu-lateral section,
-.menu-lateral ul,
-.menu-lateral li,
-.menu-lateral span {
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: auto !important;
-    height: auto !important;
-}
-/* Estilos para estructurar cada poema o entrada */
-#contenedor-posts {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: 'Georgia', serif; /* Ideal para rincones literarios y poemas */
+OCULTAR COMPLETAMENTE LA BARRA DE DESPLAZAMIENTO (RIGHT SCROLL)
+=================================================== */
+/* Oculta la visualización del scrollbar en Firefox e IE */
+.seccion-acerca-de {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
 }
 
-.tarjeta-post {
-    margin-bottom: 50px;
-    background: #ffffff;
+    /* Desintegra por completo los selectores de la barra en Chrome, Safari y Edge */
+    .seccion-acerca-de::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+/* ===================================================
+SELECTOR DE IDIOMAS ESTILO PORTAFOLIO
+=================================================== */
+.contenedor-idiomas {
+    width: 80%;
+    margin: 15px auto 5px auto !important; /* Reducido el espacio superior e inferior */
+    box-sizing: border-box;
 }
 
-.titulo-post {
-    font-size: 2rem;
-    color: #111;
-    margin-bottom: 5px;
+.selector-idiomas {
+    width: 100% !important;
+    background: #0d0d0d !important; /* Negro muy oscuro mate */
+    color: #6e6e73 !important; /* Gris ceniza a juego con tu menú */
+    border: 1px solid #181818 !important; /* Línea fina idéntica a tus separadores */
+    font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 1px !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 12px 15px !important;
+    border-radius: 4px !important;
+    cursor: pointer;
+    outline: none !important;
+    appearance: none !important; /* Quita la flecha nativa de Windows */
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    /* Añadimos una flecha sutil personalizada en color cobre */
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='10' height='10' viewBox='0 0 10 10'><path fill='%23b87333' d='M0 3l5 5 5-5z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 15px center !important;
+    transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-.fecha-post {
-    font-size: 0.9rem;
-    color: #777;
-    display: block;
-    margin-bottom: 20px;
-}
-
-.cuerpo-post {
-    line-height: 1.8;
-    color: #333;
-    font-size: 1.1rem;
-    text-align: justify;
-}
-
-    /* Forzar que las imágenes grandes de Blogger se adapten a tu web sin romperse */
-    .cuerpo-post img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 20px auto;
-        border-radius: 4px;
+    /* Efecto al pasar el ratón por encima */
+    .selector-idiomas:hover {
+        border-color: #b87333 !important; /* El borde se ilumina en cobre */
+        color: #ffffff !important;
     }
 
-.separador-post {
-    border: 0;
-    height: 1px;
-    background: #eee;
-    margin-top: 40px;
+    /* Estilo para las opciones del desplegable */
+    .selector-idiomas option {
+        background: #0d0d0d !important;
+        color: #ffffff !important;
+        padding: 10px !important;
+    }
+/* ===================================================
+ILUMINACIÓN EFECTO COBRE PARA EL DESPLEGABLE DE IDIOMAS
+=================================================== */
+
+/* 1. Estado por defecto del texto del selector cerrado */
+.selector-idiomas {
+    /* Mantenemos tus estilos anteriores pero forzamos el color base */
+    color: #db8f4f !important; /* Un cobre suave de base */
+    border-radius: 0px !important;
+    text-shadow: 0px 0px 4px rgba(184, 115, 51, 0.2) !important;
 }
+
+    /* 2. Cuando pasas el ratón por encima del selector (Hover) */
+    .selector-idiomas:hover {
+        border-color: #b87333 !important;
+        color: #ffffff !important; /* Ilumina en blanco puro */
+        text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.8) !important; /* Destello cobre */
+    }
+
+    /* 3. Estilo estricto para la lista de opciones desplegada (La caja abierta) */
+    .selector-idiomas option {
+        background: #0d0d0d !important; /* Fondo negro mate limpio */
+        color: #db8f4f !important; /* Texto iluminado en cobre por defecto */
+        font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+        font-size: 0.85rem !important;
+        padding: 12px !important;
+        /* Efecto de sombra de texto para dar sensación de brillo/neón */
+        text-shadow: 0px 0px 3px rgba(184, 115, 51, 0.5) !important;
+    }
+
+        /* 4. Cuando el usuario pasa el ratón sobre las opciones de la lista */
+        .selector-idiomas option:hover,
+        .selector-idiomas option:focus,
+        .selector-idiomas option:active,
+        .selector-idiomas option:checked {
+            background-color: #1a1a1a !important; /* Fondo sutilmente más claro al seleccionar */
+            color: #ffffff !important; /* La opción seleccionada brilla en blanco */
+            text-shadow: 0px 0px 10px rgba(184, 115, 51, 0.9) !important; /* Iluminación total */
+        }
+/* ===================================================
+ICONOS SOCIALES COLOR COBRE (PANEL IZQUIERDO)
+=================================================== */
+.redes-sociales-menu {
+    display: flex !important;
+    justify-content: center !important; /* Centra los iconos horizontalmente */
+    gap: 25px !important; /* Espacio limpio entre los dos iconos */
+    margin-top: auto !important; /* Empuja la botonera hacia abajo del todo */
+    padding: 20px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+    .redes-sociales-menu a {
+        color: #b87333 !important; /* Color cobre metálico clásico */
+        font-size: 1.2rem !important; /* Tamaño fino y estilizado */
+        text-decoration: none !important;
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+        display: inline-block !important;
+    }
+
+        /* Efecto interactivo al pasar el cursor (Hover) */
+        .redes-sociales-menu a:hover {
+            color: #ffffff !important; /* El icono cambia a blanco brillante */
+            /* Destello neón de fondo en color cobre encendido */
+            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.8) !important;
+            transform: translateY(-2px) !important; /* Sutil movimiento hacia arriba */
+        }
+/* ===================================================
+SISTEMA DE ICONOS VECTORIALES (SVG) COLOR COBRE
+=================================================== */
+.redes-sociales-menu {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 30px !important;
+    margin-top: auto !important; /* Los clava en la base del menú */
+    padding: 20px 0 10px 0 !important;
+    width: 100% !important;
+}
+
+    .redes-sociales-menu a {
+        display: inline-block !important;
+        text-decoration: none !important;
+        transition: transform 0.3s ease !important;
+    }
+
+/* El estilo de los vectores del icono */
+.icono-cobre {
+    width: 20px !important; /* Tamaño estilizado exacto */
+    height: 20px !important;
+    fill: #b87333 !important; /* Pinta el vector de color Cobre */
+    transition: fill 0.3s ease, filter 0.3s ease !important;
+}
+
+/* Efecto interactivo al pasar el cursor (Hover) */
+.redes-sociales-menu a:hover {
+    transform: translateY(-2px) !important; /* Pequeño salto hacia arriba */
+}
+
+    .redes-sociales-menu a:hover .icono-cobre {
+        fill: #ffffff !important; /* Cambia a blanco puro al pasar el ratón */
+        /* Genera el destello neón color cobre */
+        filter: drop-shadow(0px 0px 6px rgba(184, 115, 51, 0.9)) !important;
+    }

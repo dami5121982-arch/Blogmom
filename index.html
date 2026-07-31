@@ -4,22 +4,52 @@
     <meta charset="UTF-8">
     <title>Mara Rosanegra | Rincón Literario</title>
     <link rel="stylesheet" href="estilos.css?v=3">
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
     <div class="pantalla-dividida">
-
-        <!-- COLUMNA 1: MENÚ IZQUIERDO -->
-        <aside>
-            <div class="logotipo logotipo-neutro">
+        <aside class="menu-lateral">
+            <div class="logotipo">
                 MARA<br>ROSANEGRA
             </div>
+            <!-- DESPLEGABLE DE IDIOMAS MINIMALISTA -->
+            <div class="contenedor-idiomas">
+                <select class="selector-idiomas" onchange="cambiarIdioma(this.value)">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                    <option value="fr">FR</option>
+                    <option value="pt">PT</option>
+                    <option value="it">IT</option>
+                    <option value="de">DE</option>
+                    <option value="zh">ZH</option>
+                    <option value="ja">JA</option>
+                    <option value="ar">AR</option>
+                </select>
+            </div>
+
             <nav class="navegacion-vertical">
-                <a href="#">INICIO</a>
-                <a href="#">BIOGRAFÍA</a>
-                <a href="#">POEMAS</a>
-                <a href="#">PINTURA</a>
-                <a href="#">CONTACTO</a>
+                <a href="#inicio">Inicio</a>
+                <a href="#biografia">Biografía</a>
+                <a href="#poemas">Poemas</a>
+                <a href="#pintura">Pintura</a>
+                <a href="#contacto">Contacto</a>
             </nav>
+
+            <!-- SECCIÓN DE REDES SOCIALES ABAJO DEL TODO EN EL MENÚ IZQUIERDO -->
+            <div class="redes-sociales-menu">
+                <!-- Enlace Facebook -->
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                    <svg class="icono-cobre" xmlns="http://w3.org" viewBox="0 0 320 512">
+                        <path d="M80 299.3V256H12v-54.7h68v-39.7c0-67.3 41.1-104 101.4-104 28.9 0 53.7 2.1 61 3v70.7h-41.9c-32.7 0-39 15.5-39 38.3V201.3h78.3L229 256h-68.4v171.3H80z" />
+                    </svg>
+                </a>
+                <!-- Enlace Instagram -->
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <svg class="icono-cobre" xmlns="http://w3.org" viewBox="0 0 448 512">
+                        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9s-58-34.5-93.9-36.2c-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.5 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2s34.5-58 36.2-93.9c2.1-37 2.1-147.9 0-184.9zm-47 228.1c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                    </svg>
+                </a>
+            </div>
         </aside>
 
         <!-- COLUMNA 2: FOTO CENTRAL EN BLANCO Y NEGRO -->
@@ -55,8 +85,7 @@
                 la memoria de los días y la metamorfosis de las palabras a través de las estaciones.
             </p>
 
-            <a href="#" class="boton-descarga">DESCARGAR ANTOLOGÍA PDF</a>
-
+          
             <!-- Firma elegante opcional -->
             <div class="firma-autora">
                 <span style="font-family: 'Georgia', serif; font-style: italic; color: #888; font-size: 1.5rem;">Mara Rosanegra</span>
