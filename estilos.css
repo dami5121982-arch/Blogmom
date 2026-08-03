@@ -662,27 +662,136 @@ footer, .footer-blog, [id*="footer"] {
 10. ADAPTACIÓN RESPONSIVE PARA DISPOSITIVOS MÓVILES
 =================================================== */
 @media (max-width: 1000px) {
-    .pantalla-dividida {
-        flex-direction: column;
-        height: auto;
-    }
+    /* 1. Transformamos la rejilla Grid de 3 columnas a 1 sola columna vertical */
+    .pantalla-dividida
 
-    .menu-lateral, .seccion-foto-central, .seccion-acerca-de {
-        width: 100%;
-        height: auto;
-    }
-
-    .seccion-foto-central {
-        height: 450px;
-    }
-
-    .navegacion-vertical {
-        flex-direction: row;
-        margin: 20px 0;
-        justify-content: center;
-        gap: 15px;
-    }
+{
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    width: 100vw !important;
+    overflow-y: auto !important; /* Permite el scroll vertical en la página móvil */
 }
+
+/* 2. El menú lateral pasa a ser una sección superior fluida */
+.menu-lateral {
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    padding: 20px 15px !important;
+}
+
+/* Reducimos el margen y el tamaño del logotipo cobre para móviles */
+.logotipo {
+    margin-top: 10px !important;
+    width: 60% !important; /* Más pequeño para que no ocupe toda la pantalla */
+    max-width: 180px !important;
+}
+
+/* Cambiamos los enlaces del menú para que se listen horizontalmente */
+.navegacion-vertical {
+    flex-direction: row !important;
+    flex-wrap: wrap !important; /* Si no caben en una línea, bajan a la siguiente */
+    justify-content: center !important;
+    gap: 12px !important;
+    margin-top: 15px !important;
+    width: 100% !important;
+}
+
+    .navegacion-vertical a {
+        display: inline-block !important;
+        width: auto !important;
+        padding: 6px 12px !important;
+        border-bottom: none !important; /* Quitamos las líneas divisorias verticales */
+        font-size: 0.8rem !important;
+    }
+
+/* Centramos el selector de idiomas */
+.contenedor-idiomas {
+    width: 50% !important;
+    max-width: 120px !important;
+    margin: 10px auto !important;
+}
+
+/* Movemos los iconos sociales en línea horizontal */
+.redes-sociales-menu {
+    margin-top: 15px !important;
+    padding: 10px 0 !important;
+    gap: 20px !important;
+}
+
+/* 3. Ajustamos el panel central (La fotografía de portada) */
+.seccion-foto-central {
+    width: 100% !important;
+    height: 55vh !important; /* Limita la altura de la imagen en móviles */
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.imagen-fondo-autor {
+    width: 100% !important; /* Corregimos el 160% que invadía en escritorio */
+    height: 100% !important;
+    position: relative !important;
+}
+
+/* Tipografía artística "Hola, soy Mara..." ajustada para móviles */
+.texto-superpuesto-foto {
+    bottom: 5% !important;
+    left: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+    .texto-superpuesto-foto p {
+        font-size: 2.2rem !important; /* Más pequeña para evitar desbordes */
+        letter-spacing: -2px !important;
+        transform: scale(0.85, 1.4) !important; /* Suavizamos el estiramiento en móvil */
+        margin-bottom: 0 !important;
+    }
+
+/* Ocultamos los puntos de carrusel en móvil si no hay funcionalidad táctil */
+.puntos-carrusel {
+    bottom: 8px !important;
+}
+
+/* 4. Ajustamos el panel de contenidos dinámicos (Inicio, Biografía, etc.) */
+#columna-derecha {
+    /* Cuando el panel se muestre por JS, se posicionará de forma nativa en el flujo */
+    position: relative !important;
+    width: 100% !important;
+    transform: none !important; /* Desactivamos el desplazamiento lateral para móvil */
+}
+
+.seccion-acerca-de {
+    width: 100% !important;
+    height: auto !important; /* Permitimos que crezca según el texto */
+    padding: 30px 20px !important;
+    overflow: visible !important;
+}
+
+/* Ajustamos el tamaño del texto descriptivo interno */
+.descripcion-perfil, .descripcion-corta {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+}
+
+.contenedor-firma {
+    margin-bottom: 15px !important;
+}
+
+/* 5. Ajuste exclusivo para la vista de poemas en pantalla completa */
+#seccion-blog, main#seccion-blog {
+    padding: 80px 15px 40px 15px !important; /* Espacio para el botón de volver */
+}
+
+#boton-volver {
+    top: 20px !important;
+    left: 20px !important;
+}
+
+}
+
+
 /* Fuerza el ocultado absoluto por encima de cualquier otra propiedad flex o block */
 #seccion-blog.oculto,
 .pantalla-completa.oculto {
