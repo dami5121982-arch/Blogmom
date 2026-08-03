@@ -1,120 +1,158 @@
 ﻿/* ===================================================
-   1. ESTILOS GENERALES Y RESETEO (ESTILO OSCURO)
-   =================================================== */
+1. FUENTES, RESETEO GLOBAL Y CONTROL DE SCROLLS
+=================================================== */
+/* Carga de fuentes premium desde los servidores de Google */
+@import url('https://googleapis.com');
+
+/* Reseteo del cuerpo y contenedor base de la página */
 html, body {
     margin: 0;
     padding: 0;
     background-color: #111111;
     font-family: 'Arial', sans-serif;
     color: #ffffff;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* Bloquea fugas y scroll hacia los lados */
 }
 
-/* Contenedor maestro de la cabecera dividido en 3 columnas */
+    /* Regla Maestra Anti-Scroll (Activada por JS exclusivamente en poemas) */
+    html.sin-scroll, body.sin-scroll {
+        overflow: hidden !important;
+        height: 100vh !important;
+    }
+
+/* Modificadores estéticos para la barra de desplazamiento nativa de Windows */
+html {
+    scrollbar-color: #b87333 #141414 !important; /* Tirador cobre, canal oscuro */
+    scrollbar-width: thin !important; /* Barra de desplazamiento fina */
+}
+/* Soporte de color oscuro para Chrome, Edge y Safari */
+::-webkit-scrollbar {
+    width: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #141414 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b87333 !important;
+    border-radius: 4px !important;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #a05a22 !important;
+    }
+
+/* Interruptores universales de visibilidad para JavaScript */
+.oculto, .oculta {
+    display: none !important;
+}
+/* ===================================================
+2. ARQUITECTURA MAESTRA DE PORTADA (GRID DIVIDIDO)
+=================================================== */
 .pantalla-dividida {
     display: grid !important;
-    grid-template-columns: 20% 50% 30% !important; /* Fuerza exactitud matemática al 100% */
+    grid-template-columns: 20% 50% 30% !important; /* Reparto proporcional exacto */
     width: 100vw !important;
     height: 100vh !important;
     background: #111111;
     border-bottom: 2px solid #222;
-    overflow: hidden !important; /* Elimina cualquier barra de scroll horizontal */
+    overflow: hidden !important; /* Clava las secciones en su sitio */
     box-sizing: border-box !important;
 }
-
 /* ===================================================
-   2. COLUMNA 1: MENÚ LATERAL IZQUIERDO (LIMPIO)
-   =================================================== */
+3. PANEL IZQUIERDO: MENÚ, TAPIZ DE FONDO Y LOGOTIPO
+=================================================== */
 .menu-lateral {
-    width: 100% !important; /* Toma el 20% asignado por el Grid */
-    background: #000000 !important;
+    position: relative !important;
+    width: 100% !important;
+    background-color: #080402 !important;
     padding: 30px 20px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 1px solid #1a1a1a !important;
-    box-sizing: border-box;
-    /* PROPIEDADES EXTRA CRÍTICAS PARA EMPUJAR LAS REDES */
     display: flex !important;
     flex-direction: column !important;
-    height: 100vh !important; /* Fuerza a que ocupe todo el alto de la pantalla */
+    height: 100vh !important;
     box-sizing: border-box !important;
     border-right: 1px solid #1a1a1a !important;
+    overflow: hidden !important;
+    z-index: 1;
 }
 
+    /* Capa inferior: Imagen del tapiz con zoom y oscurecida */
+    .menu-lateral::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1 !important;
+        background-image: url('img/tapiz izquierdo.png') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        filter: brightness(22%) contrast(105%) !important;
+        transform: scale(1.40) !important; /* Oculta imperfecciones en bordes */
+        transform-origin: center center !important;
+    }
+
+    /* Capa superior: Tinte translúcido cobre metalizado */
+    .menu-lateral::after {
+        content: "" !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1 !important;
+        background: linear-gradient(135deg, rgba(184, 115, 51, 0.25) 0%, rgba(30, 15, 5, 0.85) 100%) !important;
+        mix-blend-mode: multiply !important; /* Funde el color cobre con el tapiz */
+    }
+
+/* Logotipo Cuadrado Forjado en Cobre */
 .logotipo {
-    /* 1. DISEÑO RECTÁNGULO/CUADRADO COBRE SÓLIDO (Recuperamos el metalizado de fondo) */
     background: linear-gradient(135deg, #b87333 0%, #804c1c 100%) !important;
-    background-color: #b87333 !important;
-    /* 2. ESPACIADO SUPERIOR DISCRETO */
     margin-top: 25px !important;
-    padding: 20px !important;
-    /* 3. TIPOGRAFÍA EN NEGRO DE ALTO CONTRASTE */
-    font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+    padding: 15px !important;
+    font-family: 'Oswald', sans-serif !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    line-height: 1.2 !important;
+    font-size: 1rem !important;
     letter-spacing: 1px !important;
     text-align: center !important;
-    color: #000000 !important; /* Forzamos letras negras para que se lean sobre el cobre */
+    color: #000000 !important; /* Letras negras para máximo contraste */
     text-transform: uppercase !important;
-    text-shadow: none !important; /* Eliminamos sombras antiguas que ensuciaban */
-    /* 4. CONFIGURACIÓN GEOMÉTRICA DE CUADRADO INDESTRUCTIBLE */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     width: 80% !important;
-    margin-inline: auto !important; /* Lo centra horizontalmente de forma perfecta */
-    aspect-ratio: 1 / 1 !important; /* Sigue garantizando que sea un cuadrado exacto */
-    /* Reducimos un poco el padding interno para que las letras sigan encajando bien */
-    padding: 15px !important;
-    font-size: 1rem !important; /* Achicamos un punto la letra si fuera necesario */
+    margin-inline: auto !important;
+    aspect-ratio: 1 / 1 !important; /* Cuadrado indestructible */
     box-sizing: border-box !important;
-    border-radius: 0px !important;
-    border: none !important;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.4) !important; /* Sutil sombra hacia abajo */
-    /* CAMBIA ESTO: Forzamos un halo de luz neón color cobre alrededor de todo el cuadrado */
-    box-shadow: 0px 0px 15px rgba(184, 115, 51, 0.7) !important;
-}
-    /* ===================================================
-EFECTO HOVER DE ILUMINACIÓN AVANZADA PARA EL LOGOTIPO
-=================================================== */
-    .logotipo:hover {
-        /* El halo de luz se vuelve más denso, brillante y expansivo */
-        box-shadow: 0px 0px 25px rgba(184, 115, 51, 0.95), 0px 0px 10px rgba(219, 143, 79, 0.6) !important;
-        /* Sutil efecto de relieve tridimensional (parece que flota hacia ti) */
-        transform: translateY(-3px) scale(1.02) !important;
-    }
-
-/* IMPORTANTE: Añade esta línea dentro de tu clase .logotipo base anterior 
-   para que el movimiento y el brillo no peguen un salto brusco */
-.logotipo {
-    /* ... (todos tus estilos anteriores) ... */
+    box-shadow: 0px 0px 15px rgba(184, 115, 51, 0.7) !important; /* Destello neón inicial */
     transition: box-shadow 0.3s ease, transform 0.3s ease !important;
 }
 
-
-/* Forzamos a limpiar cualquier contenedor de navegación antiguo */
-/* Contenedor del menú ajustado */
-/* Contenedor del menú ultra compacto */
-nav, .navegacion-vertical {
+    .logotipo:hover {
+        box-shadow: 0px 0px 25px rgba(184, 115, 51, 0.95), 0px 0px 10px rgba(219, 143, 79, 0.6) !important;
+        transform: translateY(-3px) scale(1.02) !important; /* Efecto flotante tridimensional */
+    }
+/* ===================================================
+4. COMPONENTES INTERACTIVOS DE LA BARRA LATERAL
+=================================================== */
+.navegacion-vertical {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0 !important;
-    margin-top: 15px !important; /* Reducido de 30px a 15px para arrimar el inicio */
+    margin-top: 15px !important;
     padding: 0 !important;
     background: transparent !important;
 }
 
-    /* ===================================================
-ENLACES DEL MENÚ EN COLOR COBRE BASE (ESTADO REPOSO)
-=================================================== */
-    nav a, .navegacion-vertical a {
-        font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
+    .navegacion-vertical a {
+        font-family: 'Oswald', sans-serif !important;
         font-weight: 300 !important;
-        /* CAMBIA ESTO: Pasamos de gris ceniza a tu color cobre clásico */
         color: #b87333 !important;
-        /* Añadimos un sutil reflejo inicial muy suave */
         text-shadow: 0px 0px 4px rgba(184, 115, 51, 0.2) !important;
         text-decoration: none !important;
         font-size: 0.85rem !important;
@@ -125,50 +163,139 @@ ENLACES DEL MENÚ EN COLOR COBRE BASE (ESTADO REPOSO)
         display: block !important;
         width: 100% !important;
         text-align: center !important;
-        /* Aseguramos la transición suave para el color y el movimiento */
         transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
     }
 
-        /* Efecto interactivo (Hover) y sección activa: Brillo Cobre */
-        /* ===================================================
-EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
-=================================================== */
-
-        /* Estado activo y efecto al pasar el ratón (Hover) */
-        nav a:hover, nav a.active,
         .navegacion-vertical a:hover, .navegacion-vertical a.active {
-            color: #ffffff !important; /* El texto se ilumina en blanco puro */
-            /* Genera el mismo destello neón metálico que tienen los iconos de abajo */
-            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.9) !important;
-            /* Pequeño desplazamiento interactivo hacia la derecha para darle dinamismo */
-            transform: translateX(4px) !important;
-            background: transparent !important;
+            color: #ffffff !important; /* Texto brilla en blanco */
+            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.9) !important; /* Halo de cobre encendido */
+            transform: translateX(4px) !important; /* Desplazamiento interactivo sedoso */
         }
 
-    /* Añadimos soporte de transición suave para el movimiento horizontal */
-    nav a, .navegacion-vertical a {
-        /* ... (Mantenemos tus propiedades de Oswald, padding y bordes intactas) ... */
-        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+/* Bloque Desplegable de Idiomas */
+.contenedor-idiomas {
+    width: 80%;
+    margin: 15px auto 5px auto !important;
+    box-sizing: border-box;
+}
+
+.selector-idiomas {
+    width: 100% !important;
+    background: #0d0d0d !important;
+    color: #db8f4f !important;
+    border: 1px solid #181818 !important;
+    font-family: 'Oswald', sans-serif !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase;
+    padding: 12px 15px !important;
+    border-radius: 0px !important;
+    cursor: pointer;
+    outline: none !important;
+    text-shadow: 0px 0px 4px rgba(184, 115, 51, 0.2) !important;
+    appearance: none !important; /* Rompe el aspecto nativo de Windows */
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='10' height='10' viewBox='0 0 10 10'><path fill='%23b87333' d='M0 3l5 5 5-5z'/></svg>") !important; /* Flecha cobre */
+    background-repeat: no-repeat !important;
+    background-position: right 15px center !important;
+    transition: border-color 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+    .selector-idiomas:hover {
+        border-color: #b87333 !important;
+        color: #ffffff !important;
+        text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.8) !important;
     }
 
-
+    .selector-idiomas option {
+        background: #0d0d0d !important;
+        color: #db8f4f !important;
+        padding: 12px !important;
+        font-family: 'Oswald', sans-serif !important;
+        font-size: 0.85rem !important;
+    }
 /* ===================================================
-   3. COLUMNA 2: SECCIÓN FOTO CENTRAL DRAMÁTICA
-   =================================================== */
+5. REDES SOCIALES, ICONOS VECTORIALES Y FIRMA BASE
+=================================================== */
+.redes-sociales-menu {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 30px !important;
+    margin-top: auto !important; /* Clava los iconos en la base de la pantalla */
+    padding: 20px 0 10px 0 !important;
+    width: 100% !important;
+}
+
+    .redes-sociales-menu a {
+        display: inline-block !important;
+        text-decoration: none !important;
+        transition: transform 0.3s ease !important;
+    }
+
+        .redes-sociales-menu a:hover {
+            transform: translateY(-2px) !important;
+        }
+
+/* Estilizado fino para los vectores de los logos */
+.icono-cobre {
+    width: 20px !important;
+    height: 20px !important;
+    fill: #b87333 !important; /* Tiñe el SVG en cobre mate */
+    transition: fill 0.3s ease, filter 0.3s ease !important;
+}
+
+.redes-sociales-menu a:hover .icono-cobre {
+    fill: #ffffff !important;
+    filter: drop-shadow(0px 0px 6px rgba(184, 115, 51, 0.9)) !important;
+}
+
+/* Ficha del Logotipo-Firma inferior de Mara */
+.contenedor-firma {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 20px !important;
+    margin-bottom: 45px !important;
+}
+
+.firma-autor {
+    width: 150px !important;
+    height: auto !important;
+    display: block !important;
+    opacity: 0.85 !important;
+    position: relative !important;
+    top: -30px !important;
+    filter: invert(49%) sepia(35%) saturate(1141%) hue-rotate(346deg) brightness(91%) contrast(85%) !important; /* Convierte imagen gráfica a tono cobre exacto */
+    transition: filter 0.3s ease, transform 0.3s ease !important;
+}
+
+    .firma-autor:hover {
+        opacity: 1 !important;
+        transform: scale(1.04) !important;
+        filter: invert(64%) sepia(45%) saturate(1000%) hue-rotate(335deg) brightness(100%) contrast(90%) drop-shadow(0px 0px 8px rgba(184, 115, 51, 0.95)) !important;
+    }
+/* ===================================================
+6. PANEL CENTRAL: FOTOGRAFÍA DRAMÁTICA Y TÍTULO CRICUT
+=================================================== */
+/* El ratón ignora la foto para que no interfiera en los clics laterales */
+.seccion-foto-central, .imagen-fondo-autor, .imagen-fondo-autor img {
+    pointer-events: none !important;
+}
+
 .seccion-foto-central {
-    width: 100% !important; /* Toma el 50% asignado por el Grid */
+    width: 100% !important;
     position: relative;
     height: 100%;
     background: transparent !important;
     overflow: visible !important;
 }
-/* Estiramos el contenedor de la imagen para que invada el panel derecho */
+
 .imagen-fondo-autor {
-    width: 160% !important; /* Se estira un 60% más para meterse debajo del panel derecho */
+    width: 160% !important; /* Invade sutilmente el área de la derecha */
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 0 !important;
     z-index: 1;
 }
 
@@ -176,43 +303,39 @@ EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: grayscale(100%) contrast(120%) brightness(80%);
+        filter: grayscale(100%) contrast(120%) brightness(80%); /* Efecto fotográfico artístico antiguo */
     }
 
+/* Caja del título artístico superpuesto abajo del lienzo */
 .texto-superpuesto-foto {
     position: absolute;
-    bottom: 20%;
-    left: 10%;
+    bottom: 2% !important;
+    left: 2%;
     z-index: 2;
 }
 
-    .texto-superpuesto-foto h1 {
-        font-family: 'Arial Narrow', 'Century Gothic', sans-serif !important; /* Trazo limpio y fino */
-        font-size: 3.5rem;
-        font-weight: 300 !important; /* ¡OBLIGA a que la letra sea ultra fina! */
-        line-height: 1;
-        margin: 0 0 15px 0;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
-        text-transform: uppercase;
-        /* Estiramiento vertical masivo */
-        display: block;
-        transform: scaleY(1.9) !important; /* Estira las letras casi al doble de alto */
-        transform-origin: left bottom;
-        letter-spacing: 4px !important; /* Espaciado elegante */
-    }
-
-
     .texto-superpuesto-foto p {
-        font-size: 0.9rem;
-        letter-spacing: 4px;
-        background: linear-gradient(135deg, #f3af7b 0%, #b87333 50%, #804c1c 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        border-top: 1px solid #2d2d2d;
-        padding-top: 10px;
-        display: inline-block;
+        font-family: 'Antonio', sans-serif !important;
+        font-weight: 300 !important;
+        font-size: 3.5rem !important;
+        line-height: 0.85 !important;
+        margin: 0 0 15px 0;
+        text-transform: none;
+        display: block;
+        letter-spacing: -4px !important; /* Compresión tipográfica extrema */
+        transform: scale(0.68, 1.9) !important; /* Estiramiento vertical estilo imprenta alta */
+        transform-origin: left bottom;
+        color: #b87333 !important;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.95), 0px 0px 4px rgba(184, 115, 51, 0.3) !important;
+        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+        cursor: pointer;
     }
+
+        .texto-superpuesto-foto p:hover {
+            color: #ffffff !important;
+            text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.95), 0px 0px 15px rgba(184, 115, 51, 0.95), 0px 0px 5px rgba(219, 143, 79, 0.6) !important;
+            transform: scale(0.70, 1.92) !important;
+        }
 
 .puntos-carrusel {
     position: absolute;
@@ -227,49 +350,52 @@ EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
     .puntos-carrusel span.activo {
         color: #b87333;
     }
-
 /* ===================================================
-   4. COLUMNA 3: INFORMACIÓN DE LA DERECHA (SOBRE MÍ)
-   =================================================== */
-/* ===================================================
-4. COLUMNA 3: TARJETA DE LA DERECHA ESTILO PORTAFOLIO (COBRE)
+7. PANEL DERECHO: BIENVENIDA, CUADRÍCULA Y BOTÓN DOWLOAD
 =================================================== */
+#columna-derecha {
+    position: relative;
+    /* Red de líneas matemáticas entrelazadas montadas sobre el tapiz gold */
+    background: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), url('img/gold.png');
+    background-size: 40px 40px, 40px 40px, cover;
+    background-position: center;
+    background-repeat: repeat, repeat, no-repeat;
+    opacity: 0.92;
+    backdrop-filter: blur(2px);
+    transition: all 0.3s ease;
+    pointer-events: auto !important;
+}
+
 .seccion-acerca-de {
-    width: 100% !important; /* Toma el 30% asignado por el Grid y llega al borde derecho */
-    background: rgba(230, 230, 230, 0.15) !important;
-    background-color: rgba(230, 230, 230, 0.15) !important;
+    width: 100% !important;
+    background: rgba(230, 230, 230, 0.15) !important; /* Capa esmerilada */
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
-    padding: 50px 40px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     gap: 25px;
-    overflow-y: hidden !important;
-    overflow-x: hidden !important;
-    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
     z-index: 2;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 25px 30px 20px 30px !important;
+    overflow: hidden !important;
 }
 
-    .seccion-acerca-de h2 {
-        font-size: 1.8rem;
-        letter-spacing: 3px;
-        color: #ffffff;
-        margin: 0;
+    .seccion-acerca-de h2, .seccion-acerca-de h3 {
+        color: #b87333 !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 20px !important;
     }
 
-   
-/* LÍNEA DIVISORIA CON GRABADO DE COBRE METÁLICO EN TRES DIMENSIONES */
-.linea-decorativa {
-    width: 60px;
-    height: 3px;
-    border: none;
-    background: linear-gradient(90deg, #804c1c 0%, #b87333 30%, #f3af7b 50%, #b87333 70%, #4d2c10 100%);
-    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 1px rgba(255,255,255,0.1);
-    margin: -15px 0 10px 0;
-}
+    .seccion-acerca-de p {
+        margin-top: 0 !important;
+        margin-bottom: 12px !important;
+    }
 
-/* 1. FICHA DE DATOS PERSONALES (Línea 206) */
 .datos-personales {
     list-style: none;
     padding: 0;
@@ -278,32 +404,21 @@ EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
     flex-direction: column;
     gap: 12px;
     font-size: 0.9rem;
-    color: #e5e5e5 !important; /* Subimos de gris oscuro a gris claro brillante */
+    color: #e5e5e5 !important;
 }
 
-    /* Forzamos a que los valores resalten aún más */
     .datos-personales strong {
-        color: #ffffff !important; /* Blanco puro para etiquetas (Nombre, Estilo...) */
+        color: #ffffff !important;
     }
 
-/* 2. SUBTÍTULO "PERFIL PROFESIONAL" (Línea 221) */
-.seccion-acerca-de h3 {
-    font-size: 1rem;
-    letter-spacing: 2px;
-    color: #b87333 !important; /* Le damos el toque cobre metálico para que resalte */
-    margin: 20px 0 0 0;
-    text-transform: uppercase;
-}
-
-/* 3. TEXTO DESCRIPTIVO DEL PERFIL (Línea 228) */
 .descripcion-perfil {
     font-size: 0.95rem;
     line-height: 1.7;
-    color: #f0f0f0 !important; /* Subimos a blanco roto para una lectura perfecta */
+    color: #f0f0f0 !important;
     margin: 0;
 }
 
-/* BOTÓN FORJADO EN COBRE CON EXTRUSIÓN Y SOMBRAS DE RELIEVE */
+/* Botón Forjado Metálico de Descarga */
 .boton-descarga {
     display: inline-block;
     background: linear-gradient(135deg, #b87333 0%, #6e401b 100%);
@@ -319,119 +434,233 @@ EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
     border-radius: 4px;
     transition: all 0.3s ease;
     margin-top: 10px;
-    /* El truco del relieve 3D: Luz arriba, oscuridad abajo */
-    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3), inset -1px -1px 3px rgba(0,0,0,0.6), 0px 4px 8px rgba(0,0,0,0.4);
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3), inset -1px -1px 3px rgba(0,0,0,0.6), 0px 4px 8px rgba(0,0,0,0.4); /* Relieve con luz alta y sombras */
 }
 
     .boton-descarga:hover {
-        /* Invierte el metalizado al pasar el ratón creando un efecto reflectante interactivo */
         background: linear-gradient(135deg, #db8f4f 0%, #b87333 100%);
         box-shadow: inset 1px 1px 4px rgba(255,255,255,0.5), inset -1px -1px 2px rgba(0,0,0,0.4), 0px 2px 4px rgba(0,0,0,0.6);
         transform: translateY(1px);
     }
+/* ===================================================
+8. TEXTOS INTERNOS CONMUTABLES (INICIO Y BIOGRAFÍA)
+=================================================== */
+/* El contenedor de la derecha empieza escondido fuera de la pantalla */
+#columna-derecha {
+    position: relative;
+    transform: translateX(100%); /* Lo saca completamente de la pantalla */
+    opacity: 0;
+    visibility: hidden; /* Evita que reciba interacciones fantasma mientras está oculto */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    z-index: 999 !important;
+}
+
+/* Cuando se activa el interruptor general, el panel entra limpiamente */
+body.mostrar-panel-derecho #columna-derecha {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Estructura interna de las secciones dinámicas */
+.contenido-dinamico {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    display: none !important; /* Apagados todos por defecto */
+}
+
+/* Activación individual de la pantalla correspondiente */
+#contenido-inicio:not(.oculto) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#contenido-biografia:not(.oculto) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: 100% !important;
+    padding-top: 15px !important;
+    box-sizing: border-box !important;
+}
+
+/* Centrado y control estricto de títulos internos */
+#contenido-inicio h2, #contenido-biografia h2 {
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+}
 
 /* ===================================================
-   5. CONTENEDOR DE HISTORIAS Y POEMAS (ABAJO)
-   =================================================== */
-#contenedor-posts {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 0 20px;
+9. MÓDULO EXCLUSIVO DE POEMAS (PANTALLA COMPLETA CLEAN)
+=================================================== */
+/* Cambio de fondo a negro uniforme al activar los poemas */
+body.seccion-poemas-activa {
+    background: #0b0b0b !important;
 }
 
-.post-tarjeta {
-    margin-bottom: 50px;
-    padding: 35px;
-    border-radius: 8px;
-    background: #1e1e1e;
-    border: 1px solid #2d2d2d;
-    transition: transform 0.2s ease;
+#seccion-blog, main#seccion-blog {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important; /* Se superpone a pantalla completa sobre las 3 columnas */
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 60px 20px !important;
+    box-sizing: border-box !important;
+    background: rgba(15, 15, 15, 0.95) !important; /* Capa oscura satinada anti-barra-blanca */
+    overflow-y: auto !important; /* Solo permite scroll vertical de lectura dentro del blog */
+    z-index: 99999 !important;
+    border-right: none !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
 }
 
-    .post-tarjeta .post-contenido {
-        font-size: 1.1rem;
-        line-height: 1.7;
-        color: #dddddd;
-    }
+/* Modificador de rejilla automática del padre al abrir poemas */
+.pantalla-dividida:has(#seccion-blog:not(.oculto)) {
+    grid-template-columns: 100% !important;
+}
 
-        .post-tarjeta .post-contenido img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 4px;
-        }
+/* Encajonamiento simétrico elegante para la lectura de poemas y la barra de filtros */
+#seccion-blog .contenedor-filtros,
+#seccion-blog #lista-poemas,
+#seccion-blog article,
+#seccion-blog .post-tarjeta {
+    width: 100% !important;
+    max-width: 700px !important; /* Ancho óptimo de lectura */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+}
 
-    .post-tarjeta hr {
-        border: 0;
-        border-top: 1px solid #333333;
-        margin-top: 30px;
-    }
+/* Tarjetas individuales de los poemas */
+#seccion-blog .post-tarjeta, #seccion-blog article {
+    background: rgba(25, 25, 25, 0.8) !important;
+    border: 1px solid rgba(184, 115, 51, 0.3) !important;
+    padding: 30px !important;
+    margin-bottom: 30px !important;
+    display: block !important;
+    border-radius: 4px;
+}
 
-    /* ===================================================
-   6. BORDES METALIZADOS SUTILES POR ESTACIÓN
-   =================================================== */
-    .post-tarjeta.tarjeta-primavera {
-        border-left: 5px solid #a3b899;
-    }
-
-.tarjeta-primavera .post-titulo {
-    color: #ffffff;
+#seccion-blog .post-titulo, #seccion-blog h3 {
+    color: #b87333 !important;
     font-family: 'Georgia', serif;
+    font-size: 1.6rem;
+    margin-bottom: 10px !important;
+    text-shadow: 0 0 8px rgba(184, 115, 51, 0.4) !important;
 }
 
-.tarjeta-primavera .post-fecha {
+#seccion-blog .post-contenido, #seccion-blog div {
+    color: #e0e0e0 !important;
+    font-size: 1rem;
+    line-height: 1.8 !important;
+}
+
+#seccion-blog .post-fecha {
     color: #7f8c8d;
     font-style: italic;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 15px;
 }
 
-/* En verano la tarjeta adquiere la moldura de cobre puro de la cabecera */
+/* Botón Volver Maestro (Solo visible arriba a la izquierda en poemas) */
+#boton-volver {
+    display: inline-block;
+    position: absolute !important;
+    top: 30px !important;
+    left: 40px !important;
+    color: #b87333 !important;
+    font-family: monospace;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    z-index: 999999 !important;
+    transition: text-shadow 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+    #boton-volver:hover {
+        color: #ff9d42 !important;
+        text-shadow: 0 0 12px rgba(184, 115, 51, 0.9) !important;
+    }
+
+/* Molduras de color decorativas según la etiqueta de estación del poema */
+.post-tarjeta.tarjeta-primavera {
+    border-left: 5px solid #a3b899 !important;
+}
+
 .post-tarjeta.tarjeta-verano {
-    border-left: 5px solid #b87333;
-    box-shadow: inset 2px 0px 5px rgba(184, 115, 51, 0.2);
-}
-
-.tarjeta-verano .post-titulo {
-    color: #ffffff;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-verano .post-fecha {
-    color: #7f8c8d;
-    font-style: italic;
+    border-left: 5px solid #b87333 !important;
+    box-shadow: inset 2px 0px 5px rgba(184, 115, 51, 0.2) !important;
 }
 
 .post-tarjeta.tarjeta-otono {
-    border-left: 5px solid #8c6239;
-}
-
-.tarjeta-otono .post-titulo {
-    color: #ffffff;
-    font-family: 'Georgia', serif;
-}
-
-.tarjeta-otono .post-fecha {
-    color: #7f8c8d;
-    font-style: italic;
+    border-left: 5px solid #8c6239 !important;
 }
 
 .post-tarjeta.tarjeta-invierno {
-    border-left: 5px solid #4a5568;
+    border-left: 5px solid #4a5568 !important;
 }
 
-.tarjeta-invierno .post-titulo {
-    color: #ffffff;
-    font-family: 'Georgia', serif;
+/* Animación de entrada suave cobre para el blog */
+.efecto-cobre-aparecer {
+    animation: transicionCobre 0.8s ease-in-out forwards;
+    opacity: 0;
 }
 
-.tarjeta-invierno .post-fecha {
-    color: #7f8c8d;
-    font-style: italic;
+@keyframes transicionCobre {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pie de página (Footer) unificado en la base */
+footer, .footer-blog, [id*="footer"] {
+    position: relative !important;
+    clear: both !important;
+    display: block !important;
+    text-align: center !important;
+    margin-top: 50px !important;
+    padding-bottom: 20px !important;
+    width: 100% !important;
+    color: #555;
+    font-size: 0.8rem;
 }
 
 /* ===================================================
-   7. ADAPTACIÓN PARA MÓVILES (RESPONSIVE)
-   =================================================== */
+10. ADAPTACIÓN RESPONSIVE PARA DISPOSITIVOS MÓVILES
+=================================================== */
 @media (max-width: 1000px) {
     .pantalla-dividida {
         flex-direction: column;
@@ -454,208 +683,8 @@ EFECTO DE ILUMINACIÓN COBRE PREMIUM EN EL MENÚ NAV
         gap: 15px;
     }
 }
-/* ===================================================
-OCULTAR COMPLETAMENTE LA BARRA DE DESPLAZAMIENTO (RIGHT SCROLL)
-=================================================== */
-/* Oculta la visualización del scrollbar en Firefox e IE */
-.seccion-acerca-de {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
+/* Fuerza el ocultado absoluto por encima de cualquier otra propiedad flex o block */
+#seccion-blog.oculto,
+.pantalla-completa.oculto {
+    display: none !important;
 }
-
-    /* Desintegra por completo los selectores de la barra en Chrome, Safari y Edge */
-    .seccion-acerca-de::-webkit-scrollbar {
-        display: none !important;
-        width: 0 !important;
-        height: 0 !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-    }
-/* ===================================================
-SELECTOR DE IDIOMAS ESTILO PORTAFOLIO
-=================================================== */
-.contenedor-idiomas {
-    width: 80%;
-    margin: 15px auto 5px auto !important; /* Reducido el espacio superior e inferior */
-    box-sizing: border-box;
-}
-
-.selector-idiomas {
-    width: 100% !important;
-    background: #0d0d0d !important; /* Negro muy oscuro mate */
-    color: #6e6e73 !important; /* Gris ceniza a juego con tu menú */
-    border: 1px solid #181818 !important; /* Línea fina idéntica a tus separadores */
-    font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
-    font-size: 0.8rem !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase;
-    padding: 12px 15px !important;
-    border-radius: 4px !important;
-    cursor: pointer;
-    outline: none !important;
-    appearance: none !important; /* Quita la flecha nativa de Windows */
-    -webkit-appearance: none !important;
-    -moz-appearance: none !important;
-    /* Añadimos una flecha sutil personalizada en color cobre */
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://w3.org' width='10' height='10' viewBox='0 0 10 10'><path fill='%23b87333' d='M0 3l5 5 5-5z'/></svg>") !important;
-    background-repeat: no-repeat !important;
-    background-position: right 15px center !important;
-    transition: border-color 0.3s ease, color 0.3s ease;
-}
-
-    /* Efecto al pasar el ratón por encima */
-    .selector-idiomas:hover {
-        border-color: #b87333 !important; /* El borde se ilumina en cobre */
-        color: #ffffff !important;
-    }
-
-    /* Estilo para las opciones del desplegable */
-    .selector-idiomas option {
-        background: #0d0d0d !important;
-        color: #ffffff !important;
-        padding: 10px !important;
-    }
-/* ===================================================
-ILUMINACIÓN EFECTO COBRE PARA EL DESPLEGABLE DE IDIOMAS
-=================================================== */
-
-/* 1. Estado por defecto del texto del selector cerrado */
-.selector-idiomas {
-    /* Mantenemos tus estilos anteriores pero forzamos el color base */
-    color: #db8f4f !important; /* Un cobre suave de base */
-    border-radius: 0px !important;
-    text-shadow: 0px 0px 4px rgba(184, 115, 51, 0.2) !important;
-}
-
-    /* 2. Cuando pasas el ratón por encima del selector (Hover) */
-    .selector-idiomas:hover {
-        border-color: #b87333 !important;
-        color: #ffffff !important; /* Ilumina en blanco puro */
-        text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.8) !important; /* Destello cobre */
-    }
-
-    /* 3. Estilo estricto para la lista de opciones desplegada (La caja abierta) */
-    .selector-idiomas option {
-        background: #0d0d0d !important; /* Fondo negro mate limpio */
-        color: #db8f4f !important; /* Texto iluminado en cobre por defecto */
-        font-family: 'Oswald', 'Arial Narrow', sans-serif !important;
-        font-size: 0.85rem !important;
-        padding: 12px !important;
-        /* Efecto de sombra de texto para dar sensación de brillo/neón */
-        text-shadow: 0px 0px 3px rgba(184, 115, 51, 0.5) !important;
-    }
-
-        /* 4. Cuando el usuario pasa el ratón sobre las opciones de la lista */
-        .selector-idiomas option:hover,
-        .selector-idiomas option:focus,
-        .selector-idiomas option:active,
-        .selector-idiomas option:checked {
-            background-color: #1a1a1a !important; /* Fondo sutilmente más claro al seleccionar */
-            color: #ffffff !important; /* La opción seleccionada brilla en blanco */
-            text-shadow: 0px 0px 10px rgba(184, 115, 51, 0.9) !important; /* Iluminación total */
-        }
-/* ===================================================
-ICONOS SOCIALES COLOR COBRE (PANEL IZQUIERDO)
-=================================================== */
-.redes-sociales-menu {
-    display: flex !important;
-    justify-content: center !important; /* Centra los iconos horizontalmente */
-    gap: 25px !important; /* Espacio limpio entre los dos iconos */
-    margin-top: auto !important; /* Empuja la botonera hacia abajo del todo */
-    padding: 20px 0 !important;
-    width: 100% !important;
-    box-sizing: border-box;
-}
-
-    .redes-sociales-menu a {
-        color: #b87333 !important; /* Color cobre metálico clásico */
-        font-size: 1.2rem !important; /* Tamaño fino y estilizado */
-        text-decoration: none !important;
-        transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
-        display: inline-block !important;
-    }
-
-        /* Efecto interactivo al pasar el cursor (Hover) */
-        .redes-sociales-menu a:hover {
-            color: #ffffff !important; /* El icono cambia a blanco brillante */
-            /* Destello neón de fondo en color cobre encendido */
-            text-shadow: 0px 0px 8px rgba(184, 115, 51, 0.8) !important;
-            transform: translateY(-2px) !important; /* Sutil movimiento hacia arriba */
-        }
-/* ===================================================
-SISTEMA DE ICONOS VECTORIALES (SVG) COLOR COBRE
-=================================================== */
-.redes-sociales-menu {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 30px !important;
-    margin-top: auto !important; /* Los clava en la base del menú */
-    padding: 20px 0 10px 0 !important;
-    width: 100% !important;
-}
-
-    .redes-sociales-menu a {
-        display: inline-block !important;
-        text-decoration: none !important;
-        transition: transform 0.3s ease !important;
-    }
-
-/* El estilo de los vectores del icono */
-.icono-cobre {
-    width: 20px !important; /* Tamaño estilizado exacto */
-    height: 20px !important;
-    fill: #b87333 !important; /* Pinta el vector de color Cobre */
-    transition: fill 0.3s ease, filter 0.3s ease !important;
-}
-
-/* Efecto interactivo al pasar el cursor (Hover) */
-.redes-sociales-menu a:hover {
-    transform: translateY(-2px) !important; /* Pequeño salto hacia arriba */
-}
-
-    .redes-sociales-menu a:hover .icono-cobre {
-        fill: #ffffff !important; /* Cambia a blanco puro al pasar el ratón */
-        /* Genera el destello neón color cobre */
-        filter: drop-shadow(0px 0px 6px rgba(184, 115, 51, 0.9)) !important;
-    }
-/* ===================================================
-PARCHE DE COLOR COBRE EXACTO MEDIANTE MÁSCARA CSS
-=================================================== */
-.contenedor-firma {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin-top: 15px !important;
-    margin-bottom: 45px !important; /* Mantiene la firma levantada del borde */
-    padding-bottom: 10px !important;
-}
-
-.firma-autor {
-    width: 150px !important;
-    height: 65px !important;
-    display: block !important;
-    /* 1. MÁSCARA ABREVIADA WEBKIT (Soporte Safari/móviles sin activar advertencias en VS) */
-    -webkit-mask: url('img/firmamarasf.png') no-repeat center / contain !important;
-    /* 2. MÁSCARA ESTÁNDAR OFICIAL (Para Chrome, Firefox y Edge) */
-    mask-image: url('img/firmamarasf.png') !important;
-    mask-size: contain !important;
-    mask-repeat: no-repeat !important;
-    mask-position: center !important;
-    /* 3. COLOR COBRE REAL */
-    background-color: #b87333 !important;
-    filter: none !important;
-    opacity: 0.85 !important;
-    transition: background-color 0.3s ease, filter 0.3s ease, transform 0.3s ease !important;
-}
-
-    /* Efecto hover interactivo unificado con el menú */
-    .firma-autor:hover {
-        opacity: 1 !important;
-        transform: scale(1.04) !important;
-        /* Al pasar el ratón, el fondo del molde cambia a un cobre más claro/brillante */
-        background-color: #db8f4f !important;
-        /* Proyecta el mismo destello neón color cobre que tienen los elementos de tu menú */
-        filter: drop-shadow(0px 0px 8px rgba(184, 115, 51, 0.95)) !important;
-    }
-
-
